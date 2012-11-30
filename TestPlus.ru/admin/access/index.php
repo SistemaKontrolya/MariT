@@ -18,6 +18,11 @@ include "admin_header.php";
 <button type="submit" name="logout">Выйти</button>
 </form>
 </div></header>
-
+<div>
+<?php
+ShowUsers();
+	if(isset($_GET['id'])) EditUsers($_GET['id']);
+?>
+</div>
 </body>
 </html>
