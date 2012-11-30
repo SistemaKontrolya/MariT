@@ -85,7 +85,7 @@ if(!isset($_SESSION[$rule])){
 }
 
 function ShowGroups() {
-	//$thisPage = $_SERVER['REQUEST_URI']; 
+	 
 	$q = mysql_query("SELECT * FROM Groups") or die("Invalid query: " .mysql_error());
 	if(!$q)
 		echo "error select <br>";
@@ -110,18 +110,18 @@ function ShowGroups() {
 		$superv=$str->Supervisor;
 		$dept=$str->Departament;
 		$comt=$str->Comment;
-		echo "<tr>
-		<td hidden>".$id_group."&nbsp;</td>
-		<td><a href='http://testplus.ru/admin/groups/index.php?edit=1&id=".$id_group."'><img src='/pic/pencil_32.png' alt='Редактировать' title='Редактировать'></a>
-		<a href='http://testplus.ru/admin/groups/index.php?showmembers=1&id=".$id_group."'><img src='/pic/user_32.png' title='Посмотреть участников' alt='Посмотреть участников'></a>
-		<a href='delgroup.php?id=".$id_group."' onClick='return confirm(\'Внимание! Группа ".$name_group." будет удалена. Вы согласны?\')'><img src='/pic/delete_32.png' alt='Удалить' title='Удалить группу'></a></td>
-		<td>".$name_group."&nbsp;</td>
-		<td>".$superv."&nbsp;</td>
-		<td>".$dept."&nbsp;</td>
-		<td>".$comt."&nbsp;</td>
-		</tr>";
+		echo '<tr>
+		<td hidden>'.$id_group.'&nbsp;</td>
+		<td><a href="http://testplus.ru/admin/groups/index.php?edit=1&id='.$id_group.'"><img src="/pic/pencil_32.png" alt="Редактировать" title="Редактировать"></a>
+		<a href="http://testplus.ru/admin/groups/index.php?showmembers=1&id='.$id_group.'"><img src="/pic/user_32.png" title="Посмотреть участников" alt="Посмотреть участников"></a>
+		<a href="delgroup.php?id='.$id_group.'" onClick="return confirm(\'Внимание! Группа '.$name_group.' будет удалена. Вы согласны?\')"><img src="/pic/delete_32.png" alt="Удалить" title="Удалить группу"></a></td>
+		<td>'.$name_group.'&nbsp;</td>
+		<td>'.$superv.'&nbsp;</td>
+		<td>'.$dept.'&nbsp;</td>
+		<td>'.$comt.'&nbsp;</td>
+		</tr>';
 	}
-	echo "</table>";
+	echo '</table>';
 }
 
 function ShowMembers($id){
@@ -141,7 +141,6 @@ function ShowMembers($id){
 
 function EditGroups($id)
 {
-	$thisPage = $_SERVER['REQUEST_URI']; 
 	$q=mysql_query("SELECT * FROM `Groups` WHERE `Id`='$id'") or die("Invalid query: ".mysql_error());
 	$str=mysql_fetch_array($q);
 	echo '<div class="edit">
@@ -157,19 +156,16 @@ function EditGroups($id)
 <tr><td></td>
 <td><button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button></td></tr></table>
 </form></div>';
-//$submit=$_POST['save'];
-//if(isset($submit))
-//	SaveGroup($id, $_POST['name'], $_POST['superv'], $_POST['dept'], $_POST['commt']);
 }
 
 function SaveGroup($id,$name,$superv,$dept,$commt)
 {	
 	if($id != NULL){
 		$q=mysql_query("UPDATE `Groups` SET `Name`='$name', `Supervisor`='$superv', `Department` = '$dept', `Comment` = '$commt' WHERE `Id` = '$id'");
-		header("Location: groups/index.php");}
+		header("Location: index.php");}
 	else {
 		$q=mysql_query("INSERT INTO `Groups` (`Id`, `Name`, `Supervisor`, `Department`, `Comment`) VALUES ('$id', '$name', '$superv', '$dept', '$commt')");
-		header("Location: groups/index.php");
+		header("Location: index.php");
 		if($q){
 			echo "Группа ".$name." успешно создана!<a href='groups/index.php'>Обновите список групп</a>, или <a href='groups/index.php?new=1&id=NULL'>обновите страницу</a> для создания новой группы";
 			//$_GET['new']=0;
@@ -181,11 +177,82 @@ function SaveGroup($id,$name,$superv,$dept,$commt)
 function DeleteGroup($id)
 {
 	$q=mysql_query("SELECT * FROM `users` WHERE `Group`='$id'") or die("Invalid query: ".mysql_error());
-	if(!$q){
+	$n=mysql_num_rows($q);
+	if(!$n){
 	if($id != NULL)
 		$dq=mysql_query("delete from `Groups` where `Id`=$id");
 		(!$dq)or($_SESSION['msg']='Группа удалена успешно');
 		} else{ $_SESSION['msg']='В удаляемой группе не должно быть пользователей!<br>Группа не может быть удалена!';}
-	header("Location: groups/index.php");
+	header("Location: index.php");
+}
+
+function ShowUsers(){
+	echo "Пользователи системы: <br>";
+	echo "<ul style='list-style-type: none; list-style-image:none; '><li>Администраторы";
+	ShowByRule(1,1);
+	echo "</li><li>Пользователи (ограниченные права)";
+	ShowByRule(0,1);
+	echo "</li><li>Без доступа";
+	ShowByRule(0,0);
+	echo "</li></ul>";
+	
+}
+
+function ShowByRule($adm,$usr){
+	$q=mysql_query("SELECT * FROM `users` WHERE `Admin`='$adm' and `Simple_user`='$usr'");
+	if(!$q)
+		echo "Error select";
+	$n=mysql_num_rows($q);
+	echo "<ul style='list-style-image: url(/pic/user_16.png)'>";
+	for($i=0;$i<$n;$i++)
+	{
+		$str=mysql_fetch_array($q);
+		$id_user=$str["ID"];
+		$name_user=$str["Name"];
+		echo "<li>
+		<a href='/admin/access/?edit=1&id=".$id_user."'><img src='/pic/pencil_16.png' alt=' редактировать ' title='редактировать пользователя'></a>
+		<a href='/admin/access/?show=1&id=".$id_user."' title='просмотр'>".$name_user."</a></li>";
+	}
+	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='/admin/access/?edit=1&id='>Создать нового пользователя</a>
+	</li></ul>";
+}
+
+function EditUsers($id){
+	$q=mysql_query("SELECT * FROM `Users` WHERE `ID`='$id'") or die("Invalid query: ".mysql_error());
+	$str=mysql_fetch_array($q);
+	$groups=mysql_query("SELECT * FROM `groups`")or die("Invalid query: ".mysql_error());
+	$n_groups=mysql_num_rows($groups);
+	$q1=mysql_query("SELECT Name FROM `groups` WHERE `Id`='$str[Group]'") or die("Invalid query: ".mysql_error());
+	$n_g=mysql_fetch_array($q1);
+		
+	echo '<div class="edit">
+	<a href="delgroup.php?id='.$id.'" onClick="return confirm(\'Внимание! Группа '.$str["Name"].' будет удалена. Вы согласны?\')"><img src="/pic/delete_32.png" alt="new" style="vertical-align: middle"></a>
+	<form name="fEditUser" action="saveuser.php?id="'.$id.'" method="POST">
+	<table>
+	<tr><td>ID </td><td><input type="text" readonly="readonly" value="'.$str["ID"].'" name="id"></input></td></tr>
+	<tr><td>Имя </td><td><input type="text" value="'.$str["Name"].'" name="name"></input></td></tr>
+	<tr><td>Логин </td><td><input type="text" value="'.$str["Login"].'" name="login"></input></td></tr>
+	<tr><td>Пароль </td><td><input type="password" value="'.$str["Password"].'" name="password"></input></td></tr>
+	<tr><td>E-mail </td><td><input type="email" name="email" value='.$str["E-mail"].'></input></td></tr>
+	<tr><td>Группа пользователя</td> <td>
+	<select name="select_group"><option selected value='.$str["Group"].'>'.$n_g['Name'].'</option>';
+	for($i=0;$i<$n_groups;$i++){
+		$group=mysql_fetch_object($groups) or die("Invalid query: ".mysql_error());
+		if(($group->Id)!=($str["Group"]))
+			echo '<option value="'.$group->Id.'">'.$group->Name.'</option>';
+	}
+	echo '</select>
+	</td></tr>
+	<tr><td>Роли </td><td><input type="checkbox" name="adm" value="1">Администратор <br>
+						<input type="checkbox" name="usr" value="1">Пользователь </td></tr>
+	<tr><td></td>
+	<td><button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button></td></tr></table>
+	</form></div>';
+}
+
+function SaveUser($id,$name,$login,$password,$email,$group,$adm,$usr){
+	//для проверки, потом уберется:
+	echo "id: ".$id.",login:".$login.",password:".$password.",email:".$email.",group:".$group.",adm:".$adm.",usr:".$usr."";
+	
 }
 ?>
