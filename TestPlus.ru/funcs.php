@@ -59,7 +59,6 @@ return $result;
 function SessionOff(){
 	session_unset();
 	session_destroy();
-	//header("Location: http://testplus.ru/index.php");
 }
 
 function CheckName($login){
@@ -248,8 +247,17 @@ function EditUsers($id){
 }
 
 function SaveUser($id,$name,$login,$password,$email,$group,$adm,$usr){
-	//для проверки, потом уберется:
-	echo "id: ".$id.",login:".$login.",password:".$password.",email:".$email.",group:".$group.",adm:".$adm.",usr:".$usr."";
-	
+
+	if($id){
+		$save_user=mysql_query("UPDATE `Users` SET `Name`='$name', `Login`='$login', `Password`='$password', `E-mail`='$email', `Group`='$group',`Admin`='$adm',`Simple_user`='$usr' WHERE `ID`='$id'") or die("Invalid query: " .mysql_error());
+		header("Location: index.php");
+	} else {
+		$save_user=mysql_query("INSERT INTO `Users` (`ID`,`Name`,`Login`,`Password`,`E-mail`,`Group`,`Admin`,`Simple_user`) VALUES ('$id','$name','$login','$password','$email','$group','$adm','$usr')");
+		header("Location: index.php");
+	}
+	if($save_user)$_SESSION['msg']='Изменения сохранены успешно'; else $_SESSION['msg']='Ошибка операции с БД';
+
 }
+
+
 ?>
