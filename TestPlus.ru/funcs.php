@@ -166,13 +166,10 @@ function SaveGroup($id,$name,$superv,$dept,$commt)
 	else {
 		$q=mysql_query("INSERT INTO `Groups` (`Id`, `Name`, `Supervisor`, `Department`, `Comment`) VALUES ('$id', '$name', '$superv', '$dept', '$commt')");
 		header("Location: index.php");
-		if($q){
-			echo "Группа ".$name." успешно создана!<a href='groups/index.php'>Обновите список групп</a>, или <a href='groups/index.php?new=1&id=NULL'>обновите страницу</a> для создания новой группы";
-			//$_GET['new']=0;
 		}
-	}
-	if(!$q)
-		die("Invalid query: ".mysql_error());
+		if($q)
+			$_SESSION['msg']= 'Изменения сохранены успешно';
+		else die("Invalid query: ".mysql_error());
 } 
 function DeleteGroup($id)
 {
