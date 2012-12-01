@@ -45,14 +45,14 @@ else if($n_l==1)
  }
 }
 
-function CheckRules($str){
-  $adm=$str["Admin"];
- $s_u=$str["Simple_user"];
+function CheckRules($user){
+  $adm=$user["Admin"];
+ $simple_user=$user["Simple_user"];
 if($adm==1)
 	$result=1;
-if(($adm==0)&&($s_u==1))
+if(($adm==0)&&($simple_user==1))
    	$result=0;
-if(($adm==0)&&($s_u==0)) $result=-1;
+if(($adm==0)&&($simple_user==0)) $result=-1;
 return $result;	
 }
 
@@ -184,18 +184,21 @@ function DeleteGroup($id)
 
 function ShowUsers(){
 	echo "Пользователи системы: <br>";
-	echo "<ul style='list-style-type: none; list-style-image:none; '><li>Администраторы";
-	ShowByRule(1,1);
-	echo "</li><li>Пользователи (ограниченные права)";
+	echo "<ul style='list-style-type: none; list-style-image:none; '><li><b>Администраторы</b>";
+	ShowByRule(1,0);
+	echo "</li><li><b>Пользователи (ограниченные права)</b>";
 	ShowByRule(0,1);
-	echo "</li><li>Без доступа";
+	echo "</li><li><b>Без доступа</b>";
 	ShowByRule(0,0);
-	echo "</li></ul>";
+	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='/admin/access/?edit=1&id='>Создать нового пользователя</a></li></ul>";
 	
 }
 
 function ShowByRule($adm,$usr){
-	$q=mysql_query("SELECT * FROM `users` WHERE `Admin`='$adm' and `Simple_user`='$usr'");
+	if($adm)
+		$q=mysql_query("SELECT * FROM `users` WHERE `Admin`='$adm'");
+	else
+		$q=mysql_query("SELECT * FROM `users` WHERE `Admin`='$adm' AND `Simple_user`='$usr'");
 	if(!$q)
 		echo "Error select";
 	$n=mysql_num_rows($q);
@@ -209,29 +212,37 @@ function ShowByRule($adm,$usr){
 		<a href='/admin/access/?edit=1&id=".$id_user."'><img src='/pic/pencil_16.png' alt=' редактировать ' title='редактировать пользователя'></a>
 		<a href='/admin/access/?show=1&id=".$id_user."' title='просмотр'>".$name_user."</a></li>";
 	}
-	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='/admin/access/?edit=1&id='>Создать нового пользователя</a>
-	</li></ul>";
+	echo "</li></ul>";
 }
 
-function EditUsers($id){
+function EditUsers($id,$just_show){
+	if($just_show) 
+		$disabled='disabled';
 	$q=mysql_query("SELECT * FROM `Users` WHERE `ID`='$id'") or die("Invalid query: ".mysql_error());
 	$str=mysql_fetch_array($q);
 	$groups=mysql_query("SELECT * FROM `groups`")or die("Invalid query: ".mysql_error());
 	$n_groups=mysql_num_rows($groups);
 	$q1=mysql_query("SELECT Name FROM `groups` WHERE `Id`='$str[Group]'") or die("Invalid query: ".mysql_error());
 	$n_g=mysql_fetch_array($q1);
-		
-	echo '<div class="edit">
-	<a href="deluser.php?id='.$id.'" onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><img src="/pic/delete_32.png" alt="new" style="vertical-align: middle"></a>
-	<form name="fEditUser" action="saveuser.php?id="'.$id.'" method="POST">
+	$rule=CheckRules($str);
+	$adm=''; 
+	$usr='';
+	if($rule==1)
+		$adm='checked';
+	if($rule==0)
+		$usr='checked';
+	echo '<div class="edit">';
+	if(!$just_show)
+		echo '<a href="deluser.php?id='.$id.'" onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><img src="/pic/delete_32.png" alt="new" style="vertical-align: middle"></a>';
+	echo '<form name="fEditUser" action="saveuser.php?id="'.$id.'" method="POST">
 	<table>
 	<tr><td>ID </td><td><input type="text" readonly="readonly" value="'.$str["ID"].'" name="id"></input></td></tr>
-	<tr><td>Имя </td><td><input type="text" value="'.$str["Name"].'" name="name"></input></td></tr>
-	<tr><td>Логин </td><td><input type="text" value="'.$str["Login"].'" name="login"></input></td></tr>
-	<tr><td>Пароль </td><td><input type="password" value="'.$str["Password"].'" name="password"></input></td></tr>
-	<tr><td>E-mail </td><td><input type="email" name="email" value='.$str["E-mail"].'></input></td></tr>
+	<tr><td>Имя </td><td><input type="text" '.$disabled.' value="'.$str["Name"].'" name="name"></input></td></tr>
+	<tr><td>Логин </td><td><input type="text" '.$disabled.' value="'.$str["Login"].'" name="login"></input></td></tr>
+	<tr><td>Пароль </td><td><input type="password" '.$disabled.' value="'.$str["Password"].'" name="password"></input></td></tr>
+	<tr><td>E-mail </td><td><input type="email" '.$disabled.' name="email" value='.$str["E-mail"].'></input></td></tr>
 	<tr><td>Группа пользователя</td> <td>
-	<select name="select_group"><option selected value='.$str["Group"].'>'.$n_g['Name'].'</option>';
+	<select name="select_group" '.$disabled.'><option selected value='.$str["Group"].'>'.$n_g['Name'].'</option>';
 	for($i=0;$i<$n_groups;$i++){
 		$group=mysql_fetch_object($groups) or die("Invalid query: ".mysql_error());
 		if(($group->Id)!=($str["Group"]))
@@ -239,11 +250,12 @@ function EditUsers($id){
 	}
 	echo '</select>
 	</td></tr>
-	<tr><td>Роли </td><td><input type="checkbox" name="adm" value="1">Администратор <br>
-						<input type="checkbox" name="usr" value="1">Пользователь </td></tr>
-	<tr><td></td>
-	<td><button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button></td></tr></table>
-	</form></div>';
+	<tr><td>Роли </td><td><input type="checkbox" '.$adm.' name="adm" '.$disabled.' value="1">Администратор <br>
+						<input type="checkbox" '.$usr.' name="usr" '.$disabled.' value="1">Пользователь </td></tr>
+	<tr><td></td><td>';
+	if(!$just_show)
+		echo '<button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button>';
+	echo '&nbsp;</td></tr></table></form></div>';
 }
 
 function SaveUser($id,$name,$login,$password,$email,$group,$adm,$usr){

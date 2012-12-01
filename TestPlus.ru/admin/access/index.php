@@ -21,7 +21,8 @@ include "admin_header.php";
 <div>
 <?php
 ShowUsers();
-if(isset($_GET['edit'])) EditUsers($_GET['id']);
+if(isset($_GET['show'])) EditUsers($_GET['id'],1);
+if(isset($_GET['edit'])) EditUsers($_GET['id'],0);
 if(isset($_SESSION['msg'])){
 	echo $_SESSION['msg'];
 	$_SESSION['msg']=NULL;}
