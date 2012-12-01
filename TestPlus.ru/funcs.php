@@ -222,7 +222,7 @@ function EditUsers($id){
 	$n_g=mysql_fetch_array($q1);
 		
 	echo '<div class="edit">
-	<a href="delgroup.php?id='.$id.'" onClick="return confirm(\'Внимание! Группа '.$str["Name"].' будет удалена. Вы согласны?\')"><img src="/pic/delete_32.png" alt="new" style="vertical-align: middle"></a>
+	<a href="deluser.php?id='.$id.'" onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><img src="/pic/delete_32.png" alt="new" style="vertical-align: middle"></a>
 	<form name="fEditUser" action="saveuser.php?id="'.$id.'" method="POST">
 	<table>
 	<tr><td>ID </td><td><input type="text" readonly="readonly" value="'.$str["ID"].'" name="id"></input></td></tr>
@@ -257,6 +257,14 @@ function SaveUser($id,$name,$login,$password,$email,$group,$adm,$usr){
 	}
 	if($save_user)$_SESSION['msg']='Изменения сохранены успешно'; else $_SESSION['msg']='Ошибка операции с БД';
 
+}
+
+function DeleteUser($id){
+
+	if($id != NULL)
+		$delete=mysql_query("DELETE FROM `Users` where `ID`=$id");
+	(!$delete)or($_SESSION['msg']='Пользователь удален успешно');
+	header("Location: index.php");
 }
 
 

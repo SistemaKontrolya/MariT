@@ -21,7 +21,10 @@ include "admin_header.php";
 <div>
 <?php
 ShowUsers();
-	if(isset($_GET['id'])) EditUsers($_GET['id']);
+if(isset($_GET['edit'])) EditUsers($_GET['id']);
+if(isset($_SESSION['msg'])){
+	echo $_SESSION['msg'];
+	$_SESSION['msg']=NULL;}
 ?>
 </div>
 </body>
