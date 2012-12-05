@@ -234,7 +234,7 @@ function EditUsers($id,$just_show){
 		$usr='checked';
 	echo '<div class="edit">';
 	if(!$just_show)
-		echo '<a href="deluser.php?id='.$id.'" onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><img src="/pic/delete_32.png" alt="new" style="vertical-align: middle"></a>';
+		echo '<a href="deluser.php?id='.$id.'" onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete" style="vertical-align: middle"></a>';
 	echo '<form name="fEditUser" action="saveuser.php?id="'.$id.'" method="POST">
 	<table>
 	<tr><td>ID </td><td><input type="text" readonly="readonly" value="'.$str["ID"].'" name="id"></input></td></tr>
@@ -285,14 +285,57 @@ function DeleteUser($id){
 function ShowSubjects(){
 	$get_subjects=mysql_query("SELECT * FROM `subjects`");
 	$subjects_amount=mysql_num_rows($get_subjects);
-	$subject=mysql_fetch_object($get_subjects);
-	echo '<ul> Темы тестирования: ';		
-	for($i;$i<$subjects_amount;$i++){
-		echo "<li>
-		<a href='/admin/access/?edit=1&id=".$subject->ID."'><img src='/pic/pencil_16.png' alt=' редактировать ' title='редактировать пользователя'></a>
-		<a href='/admin/access/?show=1&id=".$subject->ID."' title='просмотр'>".$subject->Name."</a></li>";
+	echo '<h1>Темы тестирования: </h1>';
+	if ($subjects_amount==0) echo 'Пока нет ни одной темы';
+	else{
+		echo '<ul>';		
+		for($i;$i<$subjects_amount;$i++){
+		$subject=mysql_fetch_object($get_subjects);
+		echo "<li style='list-style-type: none;'>
+			<a href='?edit=1&id=".$subject->ID."'><img src='/pic/pencil_16.png' alt=' редактировать ' title='редактировать тему'></a>
+			".$subject->Name."</a>";
+			if(isset($_GET['edit'])&&($_GET['id']==$subject->ID))EditSubject($subject->ID,$subject->Name);
+		echo "</li>";
+		}
 	}
-	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='/subjects/?edit=1&id='>Создать новую тему</a></li></ul>";;
+	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='?edit=1&id='>Создать новую тему</a></li></ul>";
+	if(isset($_GET['edit'])&&($_GET['id']=='')){
+		echo '<div> <b>Создание новой группы </b><br>';
+		EditSubject('','');
+		echo '</div>';
+		}
 }
+
+function EditSubject($subject_id,$subject_name){
+	$get_subjects=mysql_query("SELECT * FROM `subjects`");
+	$subjects_amount=mysql_num_rows($get_subjects);
+		echo '
+		<form name="edit_subject" action="editsubject.php" method="POST">
+		<input type="text" name="id" value="'.$subject_id.'" hidden></input>
+		<input type="text" name="name" value="'.$subject_name.'"></input>
+		<button type="submit" name="save"><img src="/pic/save_16.png" alt="Сохранить" title="Сохранить"></button>
+		<a href="delsubject.php?id='.$subject_id.'" onClick="return confirm(\'Внимание! Тема '.$subject_name.' будет удалена. Вы согласны?\')"><button type="button"><img src="/pic/delete_16.png" alt="delete" ></button></a>
+		</br>
+		</form>';
+}
+
+function SaveSubject($subject_id,$subject_name){
+	if($subject_id){ 
+		$save_subj=mysql_query("UPDATE `subjects` SET `Name`='$subject_name' WHERE `ID`='$subject_id'")or die("Invalid query: " .mysql_error());
+		header("Location: index.php");
+	} else {
+		$save_subj=mysql_query("INSERT INTO `subjects`(`ID`,`Name`) VALUES ('$subject_id','$subject_name')");
+		header("Location: index.php");
+	}
+}
+
+function DeleteSubject($subject_id){
+	if($subject_id){
+		//добавить проверку на наличие подчиненных тестов
+		$delete=mysql_query("DELETE FROM `Subjects` where `ID`='$subject_id'");
+		(!$delete)or($_SESSION['msg']='Пользователь удален успешно');}
+	header("Location: index.php");
+}
+
 
 ?>

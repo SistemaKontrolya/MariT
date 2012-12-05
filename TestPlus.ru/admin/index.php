@@ -29,7 +29,7 @@ include "admin_header.php";
 </li>
 <li><a href="#">Редактирование тестовых испытаний</a>
 	<ul>
-		<li><a href="#">Темы тестирования</a></li>
+		<li><a href="tests/subjects">Темы тестирования</a></li>
 		<li><a href="#">Редактирование тестов</a></li>
 		<li><a href="#">Назначить тестирование</a></li>
 	</ul>
