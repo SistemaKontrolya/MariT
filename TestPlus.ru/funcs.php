@@ -67,6 +67,7 @@ if(!$q_l)
  echo "error select <br>";
 $str=mysql_fetch_array($q_l);
 $name=$str["Name"];
+$_SESSION['Id']=$str["ID"];
 return $name;
 }
 
@@ -272,12 +273,26 @@ function SaveUser($id,$name,$login,$password,$email,$group,$adm,$usr){
 }
 
 function DeleteUser($id){
-
-	if($id != NULL)
-		$delete=mysql_query("DELETE FROM `Users` where `ID`=$id");
-	(!$delete)or($_SESSION['msg']='Пользователь удален успешно');
+	
+	if($id != NULL){
+		if($id==$_SESSION['Id']) $_SESSION['msg']='Вы пытаетесь удалить себя! Это невозможно';
+		elseif($id !=1) $delete=mysql_query("DELETE FROM `Users` where `ID`=$id");
+		elseif($id==1) $_SESSION['msg']='Невозможно удалить пользователя admin';
+		(!$delete)or($_SESSION['msg']='Пользователь удален успешно');}
 	header("Location: index.php");
 }
 
+function ShowSubjects(){
+	$get_subjects=mysql_query("SELECT * FROM `subjects`");
+	$subjects_amount=mysql_num_rows($get_subjects);
+	$subject=mysql_fetch_object($get_subjects);
+	echo '<ul> Темы тестирования: ';		
+	for($i;$i<$subjects_amount;$i++){
+		echo "<li>
+		<a href='/admin/access/?edit=1&id=".$subject->ID."'><img src='/pic/pencil_16.png' alt=' редактировать ' title='редактировать пользователя'></a>
+		<a href='/admin/access/?show=1&id=".$subject->ID."' title='просмотр'>".$subject->Name."</a></li>";
+	}
+	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='/subjects/?edit=1&id='>Создать новую тему</a></li></ul>";;
+}
 
 ?>
