@@ -1,0 +1,33 @@
+.fon{
+	background: url(/pic/fon.jpg) repeat-x;
+}
+.shapka
+ {
+	text-indent: 0.5em;
+	font-weight: bold;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 60px;
+	background-color: #3f5f8e;
+	color: #312c74;
+}
+.spisok
+{
+	list–style-image: url("/pic/spisok.jpg");
+	
+	text-indent: 0,5em;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 28px;
+	color: #312c74;
+	}
+.greeting
+{
+	text-align: right;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 28px;
+	color: #c4c3d8;
+	background-color: #196096;
+}
+
+ul#access{display: none;}
+ul#tests{display: none;}
+ul#service{display: none;}

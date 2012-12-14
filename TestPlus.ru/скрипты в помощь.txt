@@ -1,0 +1,17 @@
+<script type="text/javascript" language="javascript">
+function SetVisibleEdit()
+{
+// ищем нужный нам тег информера
+var elm = document.getElementById("edit_trial");
+// если тег найден, обрабатываем его
+	if(elm){
+		// меняем видимость элемента на противоположную
+		if(elm.style.visibility == "hidden"){
+				elm.style.visibility = "visible";
+		}
+	else {
+			elm.style.visibility = "hidden";
+		}
+	}
+}
+</script> 
