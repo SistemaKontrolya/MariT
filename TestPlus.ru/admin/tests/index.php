@@ -1,12 +1,13 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Редактирование тестов</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
 <style>
 	textarea:invalid + span:after {
     content: "заполните поле";
@@ -15,14 +16,7 @@ include "admin_header.php";
 </style>
 </head>
 <body>
-<header>ТЕСТИРОВАНИЕ +
-<div><a href="/admin">На главную</a></div>
-<div class="greeting">
-<?php Greeting($usr_name)?>
-
-<form name="logout" method="GET" action="../../Auth.php">
-<button type="submit" name="logout">Выйти</button>
-</form>
+<?include ("../admin_header.php");?>
 <div>
 <form name="fChooseSubject" action="" method="GET" >
 	Выберите тему: 
@@ -40,7 +34,7 @@ include "admin_header.php";
 	<input type="submit" name="choise" value="OK"></input>
 </form>
 </div>
-</div></header>
+</div>
 <div>
 <?php
 if(isset($_GET['choise'])){
@@ -50,20 +44,29 @@ if(isset($_GET['choise'])){
 ShowTests($selected);
 if(isset($_GET['show'])) EditTest($_GET['id'],1);
 if(isset($_GET['edit'])) EditTest($_GET['id'],0);
-if(isset($_GET['showquestions'])) {
-$_SESSION['location']="?subject=".$_GET['subject']."".$choise."&showquestions=1&id=".$_GET['id'];
-ShowQuestions($_GET['id']);}
 if(isset($_SESSION['msg'])){
 	echo $_SESSION['msg'];
 	$_SESSION['msg']=NULL;}
 ?>
 <!-- cтиль временный, только для удобства проверки-->
-<div style="float: left; position: relative; top: -200px; left: 400px; ">
+<div style="float: left; position: relative; top: -250px; left: 400px; ">
 <?
+if(isset($_GET['showquestions'])) {
+$_SESSION['location']="?subject=".$_GET['subject']."".$choise."&showquestions=1&id=".$_GET['id'];
+ShowQuestions($_GET['id']);}
+
 if(isset($_GET['question'])) {
 	$_SESSION['location']="?subject=".$_GET['subject']."".$choise."&showquestions=1&id=".$_GET['id'];
 	EditQuestion($_GET['question']);
 	}
+if(isset($_GET['showtrial'])){
+	if(MakeTesting($_GET['id'])){
+		echo 'Пробный тест сформирован успешно, для прохождения перейдите по ссылке ';
+		echo '<a href="testtrial.php" target="_blank">пройти тестирование</a>';
+		}
+	else $_SESSION['msg']='Не удалось построить тест';
+}
+	
 if(isset($_SESSION['msg'])){
 	echo $_SESSION['msg'];
 	$_SESSION['msg']=NULL;

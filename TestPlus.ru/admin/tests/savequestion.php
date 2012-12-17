@@ -1,30 +1,36 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 $delete=$_POST['delete']; 
+//добавление нового вопроса
 $save=$_POST['save_question'];
 if(!isset($delete)){
+//добавление нового вопроса
 	if(isset($_POST['new_question'])){ 
 		if($_POST[content]!='')
-			$save_new=mysql_query("INSERT INTO `questions`(`ID`,`Test_owner`,`Content`) VALUES ('','$_POST[owner]','$_POST[content]') ");
+			$save_new=SaveQuestion($_POST['content'],'',$_POST['owner']);
 		else $_SESSION['msg']="Запрещено сохранять пустой вопрос";
 	}
+//редактирование вопроса	
 	if(isset($save)){
 		//сохранение вопроса
 		SaveQuestion($_POST['question'],$_POST['question_id'],$_POST['owner']);
 		//сохранение ответов
-		for($i;$i<6;$i++){
-			if($_POST['correct']==$_POST['answer_num'.$i])$correct=1; else $correct='';
-			if(($correct==1)&&($_POST['answer_cont'.$i]=='')){  //если выбрали верный ответ без содержания
-				$_SESSION['msg']="В качестве верного выбран пустой ответ!<br> Заполните содержание или измените выбор!<br>";
+		for($i=0;$i<6;$i++){
+			if($_POST[correct]==$i)
+				$correct=1; 
+			else $correct=0;
+			if(($correct==1)&&($_POST["answer_cont$i"]=='')){  //если выбрали верный ответ без содержания
+				$_SESSION['msg']="В качестве верного выбран пустой ответ!<br>
+				Заполните содержание или измените выбор!<br>";
 				header("Location: index.php".$_SESSION['location']."&question=".$_POST['question_id']); //отправляем исправлять
 				exit();
 			} 
 	//если заполнено содержание ответа, сохраняем его
-			if($_POST['answer_cont'.$i]!='')
-				SaveAnswer($_POST['answer_num'.$i],$_POST['answer_cont'.$i],$_POST['question_id'],$correct);
+			if($_POST["answer_cont$i"]!='')
+				SaveAnswer($_POST["answer_num$i"],$_POST["answer_cont$i"],$_POST['question_id'],$correct);
 	//если не заполнено содержание ответа и есть id
-			if(($_POST['answer_cont'.$i]=='')&&($_POST['answer_num'.$i]!='')) DeleteAnswer($_POST['answer_num'.$i]);
+			if(($_POST["answer_cont$i"]=='')&&($_POST["answer_num$i"]!='')) DeleteAnswer($_POST["answer_num$i"]);
 	//если не заполено ни одно поле, ничего не делаем
 		}
 	}

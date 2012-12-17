@@ -1,27 +1,19 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Электронная рассылка</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<header>ТЕСТИРОВАНИЕ +
-<div><a href="/admin">На главную</a></div>
-<div class="greeting">
-<?php Greeting($usr_name)?>
-
-<form name="logout" method="GET" action="../../Auth.php">
-<button type="submit" name="logout">Выйти</button>
-</form>
-</div>
-</header>
+<?include ("../admin_header.php");?>
 
 <?php
-
+/*
 $to = ""; 
 // емайл получателя 
 
@@ -44,7 +36,7 @@ $mailheaders .= "Bcc: rn";
 
 mail($to, $subject, $message, $mailheaders);
 // отправляем письмо 
-
+*/
 ?>
 
 </body>

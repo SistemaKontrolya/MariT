@@ -1,12 +1,13 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Контроль успеваемости</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
 <style>
 TABLE{
 	width: 800px;

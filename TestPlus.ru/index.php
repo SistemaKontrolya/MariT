@@ -1,9 +1,9 @@
 <?php session_start();
-include("db_fns.php");																			
-include("funcs.php");
-$db=db_connect();
-if(!$db)
- echo "error db connect <br>";
+include("link.php");																			
+//include("funcs.php");
+//$db=db_connect();
+//if(!$db)
+// echo "error db connect <br>";
 if(isset($_SESSION['login'])){
 	echo "Вы уже авторизованы. Перейти на ";
 	if (isset($_SESSION['adm']))
@@ -25,6 +25,7 @@ $password=$_POST['pass'];
 	}
 	else
 		WhoIsWho($login,$password);
+	exit();
 }
 ?>
 <!DOCTYPE html>

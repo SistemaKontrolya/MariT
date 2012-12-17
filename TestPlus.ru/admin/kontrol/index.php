@@ -1,12 +1,13 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Контроль успеваемости</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
 <style>
 TABLE {
     width: 400px; /* Ширина таблицы */
@@ -18,16 +19,7 @@ TD {
 </style>
 </head>
 <body>
-<header>ТЕСТИРОВАНИЕ +
-<div><a href="/admin">На главную</a></div>
-<div class="greeting">
-<?php Greeting($usr_name)?>
-
-<form name="logout" method="GET" action="../../Auth.php">
-<button type="submit" name="logout">Выйти</button>
-</form>
-</div>
-</header>
+<?include ("../admin_header.php");?>
 <? 
 $this_page='?group='.$_GET['group'].'&user='.$_GET['user'].'&subject='.$_GET['subject'].'&test='.$_GET['test'].'&passed='.$_GET['passed'].'&failed='.$_GET['failed'].'&from='.$_GET['from'].'&to='.$_GET['to'].'&filter=1';
 //выводим фильтр
@@ -149,9 +141,8 @@ for($i=0;$i<$num_select;$i++){
 		<td>'.$test['Cor_ans_amount'].'</td></tr>';
 		}
 echo '</table>';
-//$this_page=$_SERVER['REQUEST_URI'];
-$this_page=$_GET;
-echo '<a href="print.php?print=1'.$this_page.$print.'" title="Версия для печати" target="_blank">Напечатать страницу</a>';
+
+echo '<a href="print.php'.$this_page.'" title="Версия для печати" target="_blank">Напечатать страницу</a>';
 ?>
 
 </body></html>

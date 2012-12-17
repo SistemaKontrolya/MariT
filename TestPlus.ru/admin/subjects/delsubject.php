@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 $id=$_GET['id'];
 if(isset($id))
 	DeleteSubject($id);

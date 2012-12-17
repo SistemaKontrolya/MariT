@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../link.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,15 +10,7 @@ include "admin_header.php";
 <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<header><div class="shapka">ТЕСТИРОВАНИЕ +</div>
-<div class="greeting">
-<?php Greeting($usr_name)?>
-
-<form name="logout" method="GET" action="../Auth.php">
-<button type="submit" name="logout">Выйти</button>
-</form>
-</div>
-</header>
+<?include "admin_header.php";?>
 <div class="fon">
 <ul class="spisok">
 <li><a href="javascript://" onMouseDown="spoiler('access')">Управление пользователями и доступом</a>

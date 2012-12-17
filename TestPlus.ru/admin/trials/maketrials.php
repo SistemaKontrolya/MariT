@@ -1,6 +1,6 @@
 <?
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 //обработка отправки fEditTrial
 	if(isset($_POST['savetrial'])){
 		if((isset($_POST['user']))&&(isset($_POST['test'])))
@@ -38,8 +38,7 @@ if(isset($_POST['finish'])) $date_end = $_POST['finish'];
   echo "<br>subjs: ";print_r($arr_sub);
   echo "<br>arr_tests: ";print_r ($arr_tests);
   echo "<br>start: ".$date_start." end: ".$date_end."<br>";
-  $current_date=date("Y-m-d");
-  echo "current: ".$current_date;*/
+  */
   
  if(is_array($arr_gr)){ //если выбраны группы пользователей, разбираем полученный массив
  foreach($arr_gr as $ind=>$group_id){  //находим id пользователей по группе и записываем в массив users
@@ -90,7 +89,7 @@ if(is_array($arr_users)){ //если выбраны пользоыватели
 //далее для каждого пользователя из масива users формируем задание на все тесты из массива tests
 for($i=0;$i<count($users);$i++){
 	for($n=0;$n<count($tests);$n++){
-		$num_created+=MakeTrial('',$users[$i],$tests[$n],$date_start,$date_end,0,0);
+		$num_created+=MakeTrial('',$users[$i],$tests[$n],$date_start,$date_end,0,1);
 	}
 }
 //для отладки echo 'created: '.$num_created.' trials';

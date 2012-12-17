@@ -1,23 +1,17 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Управление доступом</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<header>ТЕСТИРОВАНИЕ +
-<div><a href="/admin">На главную</a></div>
-<div class="greeting">
-<?php Greeting($usr_name)?>
+<?include ("../admin_header.php");?>
 
-<form name="logout" method="GET" action="../../Auth.php">
-<button type="submit" name="logout">Выйти</button>
-</form>
-</div></header>
 <div>
 <?php
 ShowUsers();

@@ -1,14 +1,7 @@
 <?php
 session_start();
-//if(!isset($_SESSION['usr']))
-//	header("Location: http://testplus.ru/index.html");
-include("../db_fns.php");
-include("../funcs.php");
+include("../link.php");
 CheckUser("usr");
-$db=db_connect();
-if(!$db)
- echo "error db connect <br>";
-
 $name=$_SESSION['login'];
 if(isset($_SESSION['login']))
 	$usr_name=CheckName($name);
@@ -30,8 +23,8 @@ else
 </div>
 <div>
 <ul class="nav">
-<li><a href="#">Персональные данные </a></li>
-<li><a href="#">Контроль успеваемости </a></li>
+<li><a href="personal_data">Персональные данные </a></li>
+<li><a href="kontrol">Контроль успеваемости </a></li>
 </ul>
 </div>
 </body>

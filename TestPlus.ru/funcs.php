@@ -62,12 +62,12 @@ function SessionOff(){
 }
 
 function CheckName($login){
-$q_l = mysql_query("SELECT * FROM users WHERE `Login`='$login'") or die("Invalid query: " .mysql_error());
+$q_l = mysql_query("SELECT `ID`,`Name` FROM users WHERE `Login`='$login'") or die("Invalid query: " .mysql_error());
 if(!$q_l)
  echo "error select <br>";
 $str=mysql_fetch_array($q_l);
 $name=$str["Name"];
-$_SESSION['Id']=$str["ID"];
+$_SESSION['id']=$str["ID"];
 return $name;
 }
 
@@ -373,15 +373,29 @@ function ShowBySubj($subject,$selected){
 		echo '</ul>';
 }
 
+function GetTestInfo($id){
+	$select_test=mysql_query("SELECT * FROM `tests` WHERE `ID`='$id'") or die("Invalid query: ".mysql_error());
+	$test=mysql_fetch_array($select_test);
+	$test_subj_array=mysql_query("SELECT Name FROM `Subjects` WHERE `ID`='".$test['Subject']."'") or die("Invalid query: ".mysql_error());
+	$test_subj=mysql_fetch_array($test_subj_array);
+	$testinfo["ID"]=$id;
+	$testinfo["Name"]=$test['Name'];
+	$testinfo["Subject"]=$test['Subject'];
+	$testinfo["Subject_name"]=$test_subj['Name'];
+	$testinfo["Questions"]=$test['Questions_amount'];
+	$testinfo["Answers"]=$test['Cor_ans_amount'];
+	$testinfo["Comment"]=$test['Comment'];
+	return $testinfo;
+}
+
 function EditTest($test_id,$just_show){
 	if($just_show)
 		$disabled='disabled';
-	$select_test=mysql_query("SELECT * FROM `tests` WHERE `ID`='$test_id'") or die("Invalid query: ".mysql_error());
-	$test=mysql_fetch_array($select_test);
-	$test_subj_array=mysql_query("SELECT Name FROM `Subjects` WHERE `ID`='$_GET[subject]'") or die("Invalid query: ".mysql_error());
-	$test_subj=mysql_fetch_array($test_subj_array);
+	$test=GetTestInfo($test_id);
 	$subjects=mysql_query("SELECT * FROM `Subjects`") or die("Invalid query: ".mysql_error());
 	$subjects_amount=mysql_num_rows($subjects);
+	$questions=mysql_query("SELECT ID FROM `Questions` WHERE `Test_owner`='$test_id'");
+	$amount_questions=mysql_num_rows($questions);
 	if(isset($_GET['choise']))$choise='&choise=OK';
 	echo '<div class="edit">';
 	if(!$just_show)
@@ -390,22 +404,24 @@ function EditTest($test_id,$just_show){
 	<table>
 	<tr><td>ID</td><td>	<input type="text" readonly="readonly" value="'.$test["ID"].'" name="id"></input></td></tr>
 	<tr><td>Имя теста</td><td><input type="text" '.$disabled.' value="'.$test["Name"].'" name="name"></input></td></tr>
-	<tr><td>Тема</td><td><select name="select_subject" '.$disabled.'><option selected value="'.$_GET["subject"].'">'.$test_subj["Name"].'</option>';
+	<tr><td>Тема</td><td><select name="select_subject" '.$disabled.'><option selected value="'.$test["Subject"].'">'.$test["Subject_name"].'</option>';
 	for($i;$i<$subjects_amount;$i++){
 		$subject=mysql_fetch_object($subjects);
 		if(($subject->ID)!=($_GET["subject"]))
 			echo '<option value="'.$subject->ID.'">'.$subject->Name.'</option>';
 	}
 	echo '</select></td></tr>
-	<tr><td>Количество вопросов <br>в сеансе</td><td><input size="2" type="test" '.$disabled.' name="quest_amount" value="'.$test["Questions_amount"].'"></input></td></tr>
-	<tr><td>Необходимое количество <br>верных ответов</td><td><input size="2" type="test" '.$disabled.' name="ans_amount" value="'.$test["Cor_ans_amount"].'"></input></td></tr>
-	<tr><td colspan="2"><a href="?subject='.$_GET["subject"].$choise.'&showquestions=1&id='.$test_id.'">Список вопросов теста</a></td></tr>
+	<tr><td>Количество вопросов <br>в сеансе</td><td><input size="2" type="test" '.$disabled.' name="quest_amount" value="'.$test["Questions"].'"></input></td></tr>
+	<tr><td>Необходимое количество <br>верных ответов</td><td><input size="2" type="test" '.$disabled.' name="ans_amount" value="'.$test["Answers"].'"></input></td></tr>
+	<tr><td colspan="2"><a href="?subject='.$test["Subject"].$choise.'&showquestions=1&id='.$test_id.'">Список вопросов теста</a></td></tr>';
+	if($amount_questions<$test["Questions"]) echo '<span class="warning">ВНИМАНИЕ! Количество введенных вопросов меньше, <br>чем указано в тесте. Тестирование не будет недоступно</span>';
+	echo '<tr><td colspan="2"><a href="?subject='.$test["Subject"].$choise.'&showtrial=1&id='.$test_id.'">Пробное тестирование</a></td></tr>
 	<tr><td colspan="2"> Комментарий <br><textarea name="commt" '.$disabled.' cols="40">'.$test["Comment"].'</textarea></td></tr>
 	<tr><td>&nbsp;</td><td>';
 	if(!$just_show)
 		echo '<button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button>';
 	echo '&nbsp;</td></tr></table></form>';
-	echo'<a href="?subject='.$_GET["subject"].$choise.'"><button>Отмена</button></a></div>';
+	echo'<a href="?subject='.$test["Subject"].$choise.'"><button>Отмена</button></a></div>';
 }
 
 function SaveTest($id, $name, $select_subject, $quest_amount, $ans_amount, $commt){
@@ -481,12 +497,12 @@ function EditQuestion($id){
 	if(!$answers_amount) echo "Не введено ни одного ответа<br>Введите ";
 		echo 'варианты ответов: <br>';
 		//выводим 6 полей для редактирования. если ответа еще нет, поле пустое
-		for($i;$i<6;$i++){
+		for($i=0;$i<6;$i++){
 		$answer=mysql_fetch_object($select_answers);
 		$checked="";
 		 if(($answer->correct)==1) $checked='checked';
 		echo '<input type="text" hidden name="answer_num'.$i.'" value="'.$answer->ID.'"></input>
-		<input type="radio" name="correct" value="'.$answer->ID.'" '.$checked.' title="Выберите правильный ответ с помощью переключателя"></input>
+		<input type="radio" name="correct" value="'.$i.'" '.$checked.' title="Выберите правильный ответ с помощью переключателя"></input>
 		<textarea cols="57" rows="1" name="answer_cont'.$i.'">'.$answer->Content.'</textarea><span></span><br>';
 		}
 	echo '<button type="submit" name="save_question"><img src="/pic/save_32.png" alt="сохранить" title="сохранить"></button>';
@@ -499,7 +515,7 @@ function SaveQuestion($question_content, $question_id, $owner){
 if(isset($question_id))
 	$save_question=mysql_query("UPDATE `questions` SET `Content`='$question_content' WHERE `ID`='$question_id'") or die("Invalid query: ".mysql_error());
 else
-	$save_question=mysql_query("INPUT INTO `questions` (`ID`,`Content`,`Test_owner`) VALUES ('$question_id','$question_content','$owner')");
+	$save_question=mysql_query("INSERT INTO `questions` (`ID`,`Content`,`Test_owner`) VALUES ('$question_id','$question_content','$owner')");
 }
 
 function DeleteQuestion($id){
@@ -616,5 +632,93 @@ function MakeOptions($objects,$num,$name){
 		if(($obj->ID)==$id) echo '<option value="'.$obj->ID.'" selected >'.$obj->Name.'</option>';
 		else echo '<option value="'.$obj->ID.'" >'.$obj->Name.'</option>';
 	}
+}
+
+function Counter(){
+
+if($_POST['question'])
+	$counter=$_POST['question'];
+else $counter=0;
+
+if($_POST['choise'])	
+	CheckAnswer($_POST['choise']);
+else {
+		if($_POST)
+			$_SESSION['msg']='Не выбран вариант ответа!';
+		if($_POST['question'])
+			$counter=($_POST['question']-1);
+		else $counter=0;
+		return $counter;
+	}
+
+//обработка кнопки Далее
+if($_POST['next']){
+	return $counter;
+}
+if($_POST['complete']){
+	//сравниваем общее кол-во верных ответов с необходимым для сдачи теста
+	if(($_SESSION['correct_answers'])>=($_SESSION['answers']))
+		$result=0; 
+	else $result=1;
+	//ТОЛЬКО ЕСЛИ ЭТО НЕ ТЕСТ
+	if(isset($_SESSION['trial_id'])){
+	$save_result=mysql_query("UPDATE `trials` SET `Passed`=1, `Failed`='$result' WHERE `ID`='".$_SESSION['trial_id']."'");
+	if($save_result){
+		header("Location: testinfo.php?id=".$_SESSION['trial_id']."");
+		}
+	}
+	else{
+	//ЕСЛИ ЭТО ТЕСТ, ПОКАЗЫВАЕМ РЕЗУЛЬТАТ
+		if($result=1)
+			$result='Тест не сдан';
+		else $result='Тест сдан';
+		echo $_SESSION['msg']='Тест пройден. Результат: '.$result;
+		exit();
+	}
+	//удаляем из сессии все ресурсы для тестирования
+	unset($_SESSION['testing'],$_SESSION['questions_amount'],$_SESSION['answers'],$_SESSION['questions'],$_SESSION['trial_id']);
+	//exit();
+	}
+	return 1;
+
+return $counter;
+} //end of Counter()
+
+function CheckAnswer($choise){
+	$select_answer=mysql_query("SELECT `correct` FROM `answers` WHERE `ID`='".$choise."'");
+	$check_answer=mysql_fetch_array($select_answer);
+	if($check_answer['correct']==1)
+		$_SESSION['correct_answers']++;
+}
+
+function MakeTesting($test_id){
+
+$test_info=GetTestInfo($test_id);
+//отбираем вопросы теста
+$select_questions=mysql_query("SELECT `ID`,`Content` FROM `questions` WHERE `Test_owner`='".$test_id."'");
+//превращаем отбор в ассоциативный массив
+if($select_questions){
+while ($question = mysql_fetch_assoc($select_questions)) {
+        $questions[$question["ID"]]=$question["Content"];
+    }
+} else return 0;
+if(is_array($questions)){
+	if($rand_questions=array_rand($questions,$test_info["Questions"]))
+		shuffle($rand_questions);	
+	else return 0;
+}
+else return 0;
+//записываем перемешанный набор вопросов в сессию
+//if(!isset($_SESSION['testing']))
+$_SESSION['testing']=$rand_questions;
+//записываем кол-во вопросов в сессию
+$_SESSION['questions_amount']=$test_info["Questions"];
+//записываем кол-во ответов в сессию
+$_SESSION['answers']=$test_info["Answers"];
+//помещаем в сессию массив вопросов
+$_SESSION['questions']=$questions;
+//обнуляем переменную для подсчета верных ответов
+$_SESSION['correct_answers']=0; 
+return 1;
 }
 ?>

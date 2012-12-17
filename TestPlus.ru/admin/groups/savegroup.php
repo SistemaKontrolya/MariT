@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "admin_header.php";
+include ("../../link.php");
 $submit=$_POST['save'];
 if(isset($submit))
 	SaveGroup($_POST['id'], $_POST['name'], $_POST['superv'], $_POST['dept'], $_POST['commt']);

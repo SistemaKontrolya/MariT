@@ -1,9 +1,7 @@
 <?php
 session_start();
-include "admin_header.php";
-//$id=$_GET[$id];
+include ("../../link.php");
 $submit=$_POST['save'];
-//$id=$_POST['id'];
 if(isset($submit))
 	SaveSubject($_POST['id'], $_POST['name']);
 ?>

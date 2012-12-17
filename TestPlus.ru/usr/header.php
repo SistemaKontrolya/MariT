@@ -1,5 +1,5 @@
-<?
-CheckUser("adm");
+<?php
+CheckUser("usr");
 if(isset($_SESSION['login'])){
 	$name=$_SESSION['login'];
 	$usr_name=CheckName($name);
@@ -8,7 +8,7 @@ else {
 	SessionOff();
 }?>
 <header>ТЕСТИРОВАНИЕ +
-<div><a href="/admin">На главную</a></div>
+<div><a href="/usr">На главную</a></div>
 <div class="greeting">
 <?php Greeting($usr_name)?>
 </div>
