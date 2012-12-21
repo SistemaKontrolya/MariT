@@ -1,6 +1,7 @@
 <?php
 session_start();
 include ("../../link.php");
+include ("../admin_header.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,7 @@ visibility: hidden; !important}
 </style>
 </head>
 <body>
-<?include ("../admin_header.php");?>
+<?include ("../cap.php");?>
 <!-- формируем письмо вручную или автоматически -->
 <a href="?auto=1" title="Письмо будет сформировано автоматически">Сообщить о предстоящем тестировании (автоматически)</a><br>
 <a href="?manual=1" title="Отправка одного письма нескольким получателям">Сформировать письмо вручную</a>

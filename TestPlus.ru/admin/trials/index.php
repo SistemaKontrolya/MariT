@@ -1,6 +1,7 @@
 <?php
 session_start();
 include ("../../link.php");
+include ("../admin_header.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +46,7 @@ visibility: hidden; !important}
 </style>
 </head>
 <body>
-<?include ("../admin_header.php");?>
+<?include ("../cap.php");?>
 <div class="form">
 <form name="fMakeTrial" action="maketrials.php" method="POST" class="temp">	
 <div class="choose"><b>Выберите пользователей или группу</b><ul>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include ("../../link.php");
+include ("../admin_header.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@ include ("../../link.php");
 </style>
 </head>
 <body>
-<?include ("../admin_header.php");?>
+<?include ("../cap.php");?>
 <div>
 <form name="fChooseSubject" action="" method="GET" >
 	Выберите тему: 

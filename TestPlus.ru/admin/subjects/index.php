@@ -1,16 +1,17 @@
 <?php
 session_start();
 include ("../../link.php");
+include ("../admin_header.php");
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Управление доступом</title>
+<title>Темы тестирования</title>
 <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<?include ("../admin_header.php");?>
+<?include ("../cap.php");?>
 <div>
 <?php
 ShowSubjects();

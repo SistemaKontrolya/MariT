@@ -90,9 +90,10 @@ function ShowGroups() {
 	if(!$q)
 		echo "error select <br>";
 	$n=mysql_num_rows($q);
-	echo "<table border=1 cellspacing=0 class='groups'><thead>
+	echo "<div class='main'>
+		<table border=1 cellspacing=0 class='groups'><thead>
 		<tr><td colspan='4'>Группы пользователей</td><td>
-		<a href='index.php?new=1&id=NULL' onClick='return confirm(\'Создаем новую группу?\')'><img src='/pic/plus_32.png' alt='new' title='Создать новую группу'></a>
+		<a href='index.php?new=1&id=NULL' onClick='return confirm(\"Создаем новую группу?\")'><img src='/pic/plus_32.png' alt='new' title='Создать новую группу'></a>
 		<a href='print.php'><img src='/pic/print_32.png'></a>
 		</td></tr></thead>
 		<tr>
@@ -121,7 +122,7 @@ function ShowGroups() {
 		<td>'.$comt.'&nbsp;</td>
 		</tr>';
 	}
-	echo '</table>';
+	echo '</table></div>';
 }
 
 function ShowMembers($id){
@@ -144,32 +145,31 @@ function EditGroups($id)
 	$q=mysql_query("SELECT * FROM `Groups` WHERE `Id`='$id'") or die("Invalid query: ".mysql_error());
 	$str=mysql_fetch_array($q);
 	echo '<div class="edit">
-	<a href="index.php?new=1&id=NULL" onClick="return confirm(\'Создаем новую группу?\')"><img src="/pic/plus_32.png" alt="new" style="vertical-align: middle"></a>
-	<a href="delgroup.php?id='.$id.'" onClick="return confirm(\'Внимание! Группа '.$str["Name"].' будет удалена. Вы согласны?\')"><img src="/pic/delete_32.png" alt="new" style="vertical-align: middle"></a>
-<form name="fEditGroup" action="savegroup.php?id="'.$id.'" method="POST">
+<form name="fEditGroup" action="savegroup.php" method="POST">
 <table>
 <tr><td>ID</td><td><input type="text" readonly="readonly" value="'.$str["Id"].'" name="id"></input></td></tr>
 <tr><td>Name </td><td><input type="text" value="'.$str["Name"].'" name="name"></input></td></tr>
 <tr><td>Supervisor </td><td><input type="text" value="'.$str["Supervisor"].'" name="superv"></input></td></tr>
 <tr><td>Department</td><td><input type="text" value="'.$str["Department"].'" name="dept"></input></td></tr>
 <tr><td colspan="2">Comment: <br><textarea name="commt" cols="30">'.$str["Comment"].'</textarea></td></tr>
-<tr><td></td>
-<td><button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button></td></tr></table>
+<tr><td>&nbsp;</td>
+<td align="right">
+<button><a href="delgroup.php?id='.$id.'" onClick="return confirm(\'Внимание! Группа '.$str["Name"].' будет удалена. Вы согласны?\')">
+<img src="/pic/delete_32.png" alt="new"></a></button>
+<button type="submit" name="submit"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button></td></tr></table>
 </form></div>';
 }
 
 function SaveGroup($id,$name,$superv,$dept,$commt)
 {	
-	if($id != NULL){
-		$q=mysql_query("UPDATE `Groups` SET `Name`='$name', `Supervisor`='$superv', `Department` = '$dept', `Comment` = '$commt' WHERE `Id` = '$id'");
-		header("Location: index.php");}
-	else {
-		$q=mysql_query("INSERT INTO `Groups` (`Id`, `Name`, `Supervisor`, `Department`, `Comment`) VALUES ('$id', '$name', '$superv', '$dept', '$commt')");
-		header("Location: index.php");
-		}
-		if($q)
-			$_SESSION['msg']= 'Изменения сохранены успешно';
-		else die("Invalid query: ".mysql_error());
+	if($id != NULL)
+		$q=mysql_query("UPDATE `groups` SET `Name`='$name', `Supervisor`='$superv', `Department` = '$dept', `Comment` = '$commt' WHERE `Id` = '$id'");
+	else 
+		$q=mysql_query("INSERT INTO `groups` (`Id`, `Name`, `Supervisor`, `Department`, `Comment`) VALUES ('$id', '$name', '$superv', '$dept', '$commt')");
+	
+	if($q)
+		$_SESSION['msg']= 'Изменения сохранены успешно<br>';
+	else $_SESSION['msg']='Ошибка сохранения<br>';
 } 
 function DeleteGroup($id)
 {

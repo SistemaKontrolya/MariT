@@ -1,6 +1,7 @@
 <?php
 session_start();
 include ("../../link.php");
+include ("../admin_header.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,7 @@ include ("../../link.php");
 <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<?include ("../admin_header.php");?>
+<?include ("../cap.php");?>
 <div style="margin 30px 0">
 <? $get_info=mysql_query("SELECT * FROM `service`");
 if((mysql_num_rows($get_info))<=1){
