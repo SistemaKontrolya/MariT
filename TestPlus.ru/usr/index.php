@@ -13,7 +13,7 @@ else
 <head>
 <meta charset="utf-8">
 <title>Пользовательский раздел</title>
-
+<link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
 <header>ТЕСТИРОВАНИЕ +</header>
@@ -21,6 +21,7 @@ else
 <?php Greeting($usr_name)?>
 <form name="lout" method="GET" action="../Auth.php"><button name="logout" type="submit">Выйти</button></form>
 </div>
+<ul class="topmenu"><li>Главная</li></ul>
 <div>
 <ul class="nav">
 <li><a href="personal_data">Персональные данные </a></li>

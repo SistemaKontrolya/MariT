@@ -9,9 +9,11 @@ if(!isset($_GET['id']))
 <head>
 <meta charset="utf-8">
 <title>Информация о тесте</title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
 <?include ("../header.php");?>
+<ul class="topmenu"><li><a href="../index.php">Главная</a></li><li><a href="index.php">Контроль успеваемости</a></li><li>Информация о тесте</li></ul>
 <br>
 <div class="service">
 <?

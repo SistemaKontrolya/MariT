@@ -10,7 +10,7 @@ include ("../../link.php");
 <link rel="stylesheet" type="text/css" href="/styles.css">
 <style>
 TABLE {
-    width: 400px; /* Ширина таблицы */
+    width: 1000px; /* Ширина таблицы */
     border: 1px solid black; /* Рамка вокруг таблицы */
    }
 TD {
@@ -20,8 +20,9 @@ TD {
 </head>
 <body>
 <?include ("../admin_header.php");?>
+
 <? 
-$this_page='?group='.$_GET['group'].'&user='.$_GET['user'].'&subject='.$_GET['subject'].'&test='.$_GET['test'].'&passed='.$_GET['passed'].'&failed='.$_GET['failed'].'&from='.$_GET['from'].'&to='.$_GET['to'].'&filter=1';
+$this_page='?group='.$_GET['group'].'&user='.$_GET['user'].'&subject='.$_GET['subject'].'&test='.$_GET['test'].'&failed='.$_GET['failed'].'&from='.$_GET['from'].'&to='.$_GET['to'].'&filter=1';
 //выводим фильтр
 echo '<a href="'.$this_page.'">Фильтр</a>';
 	if(($_GET['filter'])==1){
@@ -33,7 +34,6 @@ echo '<a href="'.$this_page.'">Фильтр</a>';
 	$num_subjects=mysql_num_rows($subjects);
 	$tests=mysql_query("SELECT `ID`,`Name` FROM `tests` ORDER BY `Name`");
 	$num_tests=mysql_num_rows($tests);
-	if($_GET['passed']==1) $checked_p="checked"; //НА ВРЕМЯ ОТЛАДКИ! УБРАТЬ ПОСЛЕ ПОЯВЛЕНИЯ ПРОВЕДЕННЫХ ИСПЫТАНИЙ
 	if($_GET['failed']==1) $checked_f="checked";
 		echo '<form method="GET" action="" name="fFilter">
 		<table>
@@ -48,8 +48,7 @@ echo '<a href="'.$this_page.'">Фильтр</a>';
 		echo '</select></td></tr>
 		<tr><td>Тест</td><td><select name="test">';
 		MakeOptions($tests,$num_tests,"test");
-		echo '</select></td></tr> <!-- //НА ВРЕМЯ ОТЛАДКИ! УБРАТЬ ПОСЛЕ ПОЯВЛЕНИЯ ПРОВЕДЕННЫХ ИСПЫТАНИЙ-->
-		<tr><td>Тест пройден</td><td><input type="checkbox" name="passed" value="1" '.$checked_p.'></td></tr> 
+		echo '</select></td></tr> 
 		<tr><td>Тест не сдан</td><td><input type="checkbox" name="failed" value="1" '.$checked_f.'></td></tr>
 		<tr><td colspan="2"><fieldset><legend>Период</legend>с  <input type="date" name="from" value="'.$_GET['from'].'">по <input type="date" name="to" value="'.$_GET['to'].'"></fieldset></td></tr>
 		<tr><td colspan="2" align="right"><button type="submit" name="filter">OK</button></td></tr>
@@ -87,35 +86,25 @@ echo '<a href="'.$this_page.'">Фильтр</a>';
 	if($_GET['test']!=''){ //если выбран тест
 		$test='AND `Test_id`='.$_GET['test']; //переписываем отбор по тесту
 	}
-	//НА ВРЕМЯ ОТЛАДКИ! УБРАТЬ ПОСЛЕ ПОЯВЛЕНИЯ ПРОВЕДЕННЫХ ИСПЫТАНИЙ
-	if($_GET['passed']==1){		//если стоит флаг "тест пройден"
-		$passed='AND `Passed`=1'; //добавляем отбор только по пройденным
-	}
 	if($_GET['failed']==1){		//если стоит флаг "тест не сдан"
 		$failed='AND `Failed`=1'; //добавляем отбор только несданным
 	}
 		
 	//если выбран период, то выводим записи по периоду
 	if(($_GET['from']!='')&&($_GET['to']!='')) 
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='".$_GET['from']."' AND `Date_end`<='".$_GET['to']."' ".$test." ".$user." ".$passed." ".$failed."");
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='".$_GET['from']."' AND `Date_end`<='".$_GET['to']."' AND `Passed`=1 ".$test." ".$user." ".$failed."");
 	else if($_GET['from']!='')
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='".$_GET['from']."' ".$test." ".$user." ".$passed." ".$failed."");
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='".$_GET['from']."' ".$test." ".$user." AND `Passed`=1 ".$failed."");
 	else if($_GET['to']!='')
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_end`<='".$_GET['to']."' ".$test." ".$user." ".$passed." ".$failed."");
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_end`<='".$_GET['to']."' ".$test." ".$user." AND `Passed`=1 ".$failed."");
 	else  //если период не выбран
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>=0 ".$test." ".$user." ".$passed." ".$failed."");
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>=0 ".$test." ".$user." AND `Passed`=1 ".$failed."");
 
-unset($test,$user,$passed,$failed); //удаляем переменные с текстом запроса
+unset($test,$user,$failed); //удаляем переменные с текстом запроса
 //выводим результат
 $num_select=mysql_num_rows($select_trials);	
-//echo '<table>';
-/*for($i=0;$i<$num_select;$i++){
-	$trial=mysql_fetch_object($select_trials);
-	echo '<tr><td>'.$trial->ID.'</td><td>'.$trial->User_id.'</td>
-	<td>'.$trial->Test_id.'</td><td>'.$trial->Date_start.'</td>
-	<td>'.$trial->Date_end.'</td><td>'.$trial->Passed.'</td><td>'.$trial->Failed.'</td></tr>';
-}*/
-echo '<table border=1 cellspacing=0 width="80%">
+
+echo '<table border=1 cellspacing=0 width="1000px">
 <caption>Проведенные тестовые испытания:</caption>
 <thead>
 <tr><td>Назначено пользователю: </td><td>Название теста</td><td>Дата начала</td><td>Дата окончания</td><td>Отметка о<br> прохождении</td>
@@ -131,8 +120,8 @@ for($i=0;$i<$num_select;$i++){
 	$test_info=mysql_query("SELECT `Name`, `Questions_amount`, `Cor_ans_amount` FROM `tests` WHERE `ID`=$trial->Test_id");
 	$test=mysql_fetch_array($test_info);
 	echo'<td>'.$test['Name'].'</td>
-		<td>'.$trial->Date_start.'</td>
-		<td>'.$trial->Date_end.'</td>';
+		<td width="80px">'.$trial->Date_start.'</td>
+		<td width="80px">'.$trial->Date_end.'</td>';
 	if(($trial->Passed)==1)	$passed="тест пройден"; else $passed="не пройден";
 	echo '<td>'.$passed.'</td>';
 	if((($trial->Failed)==0)&&(($trial->Passed)==1)) $failed="тест сдан"; else $failed="тест не сдан";

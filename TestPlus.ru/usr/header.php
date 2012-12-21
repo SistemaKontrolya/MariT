@@ -8,7 +8,6 @@ else {
 	SessionOff();
 }?>
 <header>ТЕСТИРОВАНИЕ +
-<div><a href="/usr">На главную</a></div>
 <div class="greeting">
 <?php Greeting($usr_name)?>
 </div>

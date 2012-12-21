@@ -8,27 +8,33 @@ include ("../link.php");
 <meta charset="utf-8">
 <title>Администрирование</title>
 <link rel="stylesheet" type="text/css" href="/styles.css">
+ <style>
+  
+  </style>
 </head>
 <body>
-<?include "admin_header.php";?>
+<?include "admin_header.php";
+//include "menu.html";
+?>
+
 <div class="fon">
-<ul class="spisok">
-<li><a href="javascript://" onMouseDown="spoiler('access')">Управление пользователями и доступом</a>
-	<ul id="access">
+<ul>
+<li><a href="#">Управление пользователями и доступом</a>
+	<ul>
 		<li><a href="groups">Группы пользователей</a></li>
 		<li><a href="access">Управление доступом</a></li>
 	</ul>
 </li>
-<li><a href="#" onClick="spoiler('tests')">Редактирование тестовых испытаний</a>
-	<ul id="tests">
+<li><a href="#">Редактирование тестовых испытаний</a>
+	<ul>
 		<li><a href="subjects">Темы тестирования</a></li>
 		<li><a href="tests">Редактирование тестов</a></li>
 		<li><a href="trials">Назначить тестирование</a></li>
 	</ul>
 </li>
 <li><a href="kontrol">Контроль успеваемости</a></li>
-<li><a href="#" onClick="spoiler('service')">Сервис</a>
-	<ul id="service">
+<li><a href="#">Сервис</a>
+	<ul>
 		<li><a href="service/mail.php">Электронная рассылка</a></li>
 		<li><a href="service/addition.php">Дополнительно</a></li>
 	</ul>
@@ -36,25 +42,7 @@ include ("../link.php");
 </ul>
 </div>
 <script>
-	function spoiler(id){
-var obj = "";
- //Проверить совместимость браузера
-if(document.getElementById)
-obj = document.getElementById(id).style;
-else if(document.all)
-obj = document.all[id];
-else if(document.layers)
-obj = document.layers[id];
-else
-return 1;
-// Пошла магия
-if(obj.display == "none"){
-	obj.display = "block";
-	obj.li.display = "block";}
-else
-	obj.display = "none";
 	
-}
 </script>
 </body>
 </html>
