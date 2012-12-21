@@ -10,8 +10,9 @@ include ("../../link.php");
 <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<?include ("../admin_header.php");?>
-<? ShowGroups();
+<?include ("../admin_header.php");
+
+ShowGroups();
 $edit=$_GET['edit'];
 $showmembers=$_GET['showmembers'];
 $id=$_GET['id'];

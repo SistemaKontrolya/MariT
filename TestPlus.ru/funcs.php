@@ -93,7 +93,7 @@ function ShowGroups() {
 	echo "<table border=1 cellspacing=0 class='groups'><thead>
 		<tr><td colspan='4'>Группы пользователей</td><td>
 		<a href='index.php?new=1&id=NULL' onClick='return confirm(\'Создаем новую группу?\')'><img src='/pic/plus_32.png' alt='new' title='Создать новую группу'></a>
-		<a href='#'><img src='/pic/print_32.png'></a>
+		<a href='print.php'><img src='/pic/print_32.png'></a>
 		</td></tr></thead>
 		<tr>
 		<td hidden>id</td>
