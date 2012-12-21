@@ -43,9 +43,12 @@ ul#service{display: none;}
 li a{
 	text-decoration: none;}
 ul{list-style-type:none;}
-
+form {
+	text-align: left;	
+}
 .edit {   /* класс для блоков редактирования элементов*/
 	width: 20%;
+	text-align: right;
 	background: grey;
 	margin:0;
 	position:relative;
@@ -59,4 +62,21 @@ ul{list-style-type:none;}
 	background: yellow;
 	position:relative;
 	float:left;
+}
+
+li.regular_list{
+	margin-top:5px;
+}
+
+li.regular_list a{
+	display: inline;
+	text-decoration: none;	
+}
+li.regular_list a:hover {
+	background-color:transparent;
+	color:grey;            /* потом поправить по макету*/
+	text-decoration:underline;
+}
+li.regular_list a:hover img{
+	background-color:#cccccc;
 }

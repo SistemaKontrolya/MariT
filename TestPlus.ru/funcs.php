@@ -144,7 +144,7 @@ function EditGroups($id)
 {
 	$q=mysql_query("SELECT * FROM `Groups` WHERE `Id`='$id'") or die("Invalid query: ".mysql_error());
 	$str=mysql_fetch_array($q);
-	echo '<div class="edit" align="right">
+	echo '<div class="edit">
 <a href="index.php"><img title="Закрыть" alt="отмена" src="/pic/close.png"></a>
 <form name="fEditGroup" action="savegroup.php" method="POST">
 <table>
@@ -187,14 +187,16 @@ function DeleteGroup($id)
 }
 
 function ShowUsers(){
+	echo '<div class="main">';
 	echo "Пользователи системы: <br>";
-	echo "<ul style='list-style-type: none; list-style-image:none; '><li><b>Администраторы</b>";
+	echo "<ul><li><b>Администраторы</b>";
 	ShowByRule(1,0);
 	echo "</li><li><b>Пользователи (ограниченные права)</b>";
 	ShowByRule(0,1);
 	echo "</li><li><b>Без доступа</b>";
 	ShowByRule(0,0);
 	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='/admin/access/?edit=1&id='>Создать нового пользователя</a></li></ul>";
+	echo '</div>';
 	
 }
 
@@ -212,7 +214,7 @@ function ShowByRule($adm,$usr){
 		$str=mysql_fetch_array($q);
 		$id_user=$str["ID"];
 		$name_user=$str["Name"];
-		echo "<li>
+		echo "<li class='regular_list'>
 		<a href='/admin/access/?edit=1&id=".$id_user."'><img src='/pic/pencil_16.png' alt=' редактировать ' title='редактировать пользователя'></a>
 		<a href='/admin/access/?show=1&id=".$id_user."' title='просмотр'>".$name_user."</a></li>";
 	}
@@ -235,9 +237,7 @@ function EditUsers($id,$just_show){
 		$adm='checked';
 	if($rule==0)
 		$usr='checked';
-	echo '<div class="edit">';
-	if(!$just_show)
-		echo '<a href="deluser.php onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete" style="vertical-align: middle"></a>';
+	echo '<div class="edit"><a href="index.php"><img title="Закрыть" alt="отмена" src="/pic/close.png"></a>';
 	echo '<form name="fEditUser" action="saveuser.php?id="'.$id.'" method="POST">
 	<table>
 	<tr><td>ID </td><td><input type="text" readonly="readonly" value="'.$str["ID"].'" name="id"></input></td></tr>
@@ -256,9 +256,12 @@ function EditUsers($id,$just_show){
 	</td></tr>
 	<tr><td>Роли </td><td><input type="checkbox" '.$adm.' name="adm" '.$disabled.' value="1">Администратор <br>
 						<input type="checkbox" '.$usr.' name="usr" '.$disabled.' value="1">Пользователь </td></tr>
-	<tr><td></td><td>';
-	if(!$just_show)
+	<tr><td></td><td align="right">';
+	if(!$just_show){
+		if($id)
+			echo '<a href="deluser.php onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><button><img src="/pic/delete_32.png" alt="delete"></button></a>';
 		echo '<button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button>';
+	}
 	echo '&nbsp;</td></tr></table></form></div>';
 }
 
