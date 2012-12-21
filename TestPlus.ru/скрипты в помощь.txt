@@ -15,23 +15,3 @@ var elm = document.getElementById("edit_trial");
 	}
 }
 </script> 
-
-function spoiler(id){
-var obj = "";
- //Проверить совместимость браузера
-if(document.getElementById)
-obj = document.getElementById(id).style;
-else if(document.all)
-obj = document.all[id];
-else if(document.layers)
-obj = document.layers[id];
-else
-return 1;
-// Пошла магия
-if(obj.display == "none"){
-	obj.display = "block";
-	obj.li.display = "block";}
-else
-	obj.display = "none";
-	
-}

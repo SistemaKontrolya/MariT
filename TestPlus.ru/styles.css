@@ -31,32 +31,3 @@
 ul#access{display: none;}
 ul#tests{display: none;}
 ul#service{display: none;}
-
-.topmenu{list-style-type:none;
-	list-style-image:none;
-}
-.topmenu li{
-	display: inline;
-	border-left:1px solid grey;
-	padding:0 10px;
-}
-li a{
-	text-decoration: none;}
-ul{list-style-type:none;}
-
-.edit {   /* класс для блоков редактирования элементов*/
-	width: 20%;
-	background: grey;
-	margin:0;
-	position:relative;
-	display:inline-block;
-	
-}
-
-.main{  /* класс для блока, где выводится основная информация страницы*/
-	width: 60%;
-	margin:0;
-	background: yellow;
-	position:relative;
-	float:left;
-}

@@ -26,12 +26,6 @@ $password=$_POST['pass'];
 <meta charset="utf-8">
 <title>Авторизация</title>
 <style>
-input {
-display: block;
-width: 150px;
-margin:0;
-padding:0;
-}
 </style>
 </head>
 

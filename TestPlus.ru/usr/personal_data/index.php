@@ -7,16 +7,14 @@ include ("../../link.php");
 <head>
 <meta charset="utf-8">
 <title>Персональные данные</title>
-<link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
 <?include ("../header.php");?>
-<ul class="topmenu"><li><a href="../index.php">Главная</a></li><li>Персональные данные</li></ul>
 <div>
 <?
-if(isset($_SESSION['id'])){
+if(isset($_SESSION['Id'])){
 	
-	$users=mysql_query("SELECT * FROM `Users` WHERE `ID`='".$_SESSION['id']."'") or die("Invalid query: ".mysql_error());
+	$users=mysql_query("SELECT * FROM `Users` WHERE `ID`='".$_SESSION['Id']."'") or die("Invalid query: ".mysql_error());
 	$user=mysql_fetch_array($users);
 	$rule=CheckRules($user);
 	$adm=''; 

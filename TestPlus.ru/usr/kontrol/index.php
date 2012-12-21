@@ -6,11 +6,9 @@ include ("../../link.php");?>
 <head>
 <meta charset="utf-8">
 <title>Контроль успеваемости</title>
-<link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
 <?include ("../header.php");?>
-<ul class="topmenu"><li><a href="../index.php">Главная</a></li><li>Контроль успеваемости</li></ul>
 <div>
 <form name="filter" action="" method="GET">
 Показать тесты: <select name="show">
