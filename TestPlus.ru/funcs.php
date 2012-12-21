@@ -144,19 +144,22 @@ function EditGroups($id)
 {
 	$q=mysql_query("SELECT * FROM `Groups` WHERE `Id`='$id'") or die("Invalid query: ".mysql_error());
 	$str=mysql_fetch_array($q);
-	echo '<div class="edit">
+	echo '<div class="edit" align="right">
+<a href="index.php"><img title="Закрыть" alt="отмена" src="/pic/close.png"></a>
 <form name="fEditGroup" action="savegroup.php" method="POST">
 <table>
 <tr><td>ID</td><td><input type="text" readonly="readonly" value="'.$str["Id"].'" name="id"></input></td></tr>
-<tr><td>Name </td><td><input type="text" value="'.$str["Name"].'" name="name"></input></td></tr>
-<tr><td>Supervisor </td><td><input type="text" value="'.$str["Supervisor"].'" name="superv"></input></td></tr>
-<tr><td>Department</td><td><input type="text" value="'.$str["Department"].'" name="dept"></input></td></tr>
-<tr><td colspan="2">Comment: <br><textarea name="commt" cols="30">'.$str["Comment"].'</textarea></td></tr>
+<tr><td>Название </td><td><input type="text" value="'.$str["Name"].'" name="name" autofocus></input></td></tr>
+<tr><td>Куратор </td><td><input type="text" value="'.$str["Supervisor"].'" name="superv"></input></td></tr>
+<tr><td>Подразделение<br> (кафедра)</td><td><input type="text" value="'.$str["Department"].'" name="dept"></input></td></tr>
+<tr><td colspan="2">Комментарий: <br><textarea name="commt" cols="30">'.$str["Comment"].'</textarea></td></tr>
 <tr><td>&nbsp;</td>
-<td align="right">
-<button><a href="delgroup.php?id='.$id.'" onClick="return confirm(\'Внимание! Группа '.$str["Name"].' будет удалена. Вы согласны?\')">
-<img src="/pic/delete_32.png" alt="new"></a></button>
-<button type="submit" name="submit"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button></td></tr></table>
+<td align="right">';
+if($id){
+echo '<button><a href="delgroup.php?id='.$id.'" onClick="return confirm(\'Внимание! Группа '.$str["Name"].' будет удалена. Вы согласны?\')">
+<img src="/pic/delete_32.png" alt="new"></a></button>';
+}
+echo '<button type="submit" name="submit"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button></td></tr></table>
 </form></div>';
 }
 
