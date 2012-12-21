@@ -5,8 +5,9 @@ if(!$q_l)
  echo "error select <br>";
 $n_l=mysql_num_rows($q_l);
 if($n_l==0){
- echo "Пользователь не найден <br>";
-  SessionOff();
+  $_SESSION['msg']="Пользователь не найден <br>";
+  header("Location: index.php");
+  //SessionOff();
  }
 else if($n_l>1){
  echo("ошибка (не уникальный логин)<br>");
@@ -17,9 +18,8 @@ else if($n_l==1)
    $str=mysql_fetch_array($q_l);
    $true_pass=$str["Password"];
    if($password!=$true_pass){
-	 echo "Неверный пароль!";
-	 SessionOff();
-	 exit();
+	 $_SESSION['msg']= "Неверный пароль!";
+	 header("Location: index.php");
 	}
    else
     {	
@@ -300,7 +300,7 @@ function ShowSubjects(){
 	}
 	echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='?edit=1&id='>Создать новую тему</a></li></ul>";
 	if(isset($_GET['edit'])&&($_GET['id']=='')){
-		echo '<div> <b>Создание новой группы </b><br>';
+		echo '<div> <b>Создание новой темы </b><br>';
 		EditSubject('','');
 		echo '</div>';
 		}
@@ -721,4 +721,20 @@ $_SESSION['questions']=$questions;
 $_SESSION['correct_answers']=0; 
 return 1;
 }
+
+function SendNotice($from,$to){
+	//если выбран период, то выводим записи по периоду
+	if(($from!='')&&($to!='')) 
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='$from' AND `Date_end`<='$to' AND `Passed`=0");
+	else if($from!='')
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='$from' AND `Passed`=0");
+	else if($to!='')
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_end`<='to' AND `Passed`=0");
+	else  //если период не выбран
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>=0 AND `Passed`=0");
+	
+
+}
+
+
 ?>

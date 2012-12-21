@@ -1,9 +1,5 @@
 <?php session_start();
 include("link.php");																			
-//include("funcs.php");
-//$db=db_connect();
-//if(!$db)
-// echo "error db connect <br>";
 if(isset($_SESSION['login'])){
 	echo "Вы уже авторизованы. Перейти на ";
 	if (isset($_SESSION['adm']))
@@ -11,11 +7,7 @@ if(isset($_SESSION['login'])){
 	if (isset($_SESSION['usr']))
 		echo "<a href='usr/index.php'>главную страницу</a> своего раздела";
 	}
-//if (isset($_GET['logout'])) {
- //   SessionOff();
- //   header("Location: http://testplus/index.php");
- //   exit(); 
-//}
+
 if(isset($_POST['submit'])){
 $login=$_POST['login'];
 $password=$_POST['pass'];
@@ -46,5 +38,14 @@ $password=$_POST['pass'];
 <input type="reset" name="reset" value="Очистить форму">
 
 </form>
+<div class="service">
+<?
+if(isset($_SESSION['msg'])){
+		echo $_SESSION['msg'];
+		SessionOff();
+	}
+$_SESSION['msg']='';
+?>
+</div>
 </body>
 </html>
