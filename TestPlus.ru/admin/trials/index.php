@@ -39,8 +39,9 @@ visibility: hidden; !important}
  overflow: auto;
  }
  .temp{background-color:yellow;}
- .form{width:80%;
- padding:0;}
+ .form{width:1000px;
+ padding:0;
+ align: center;}
 </style>
 </head>
 <body>
@@ -64,23 +65,23 @@ visibility: hidden; !important}
 			$users=mysql_query("SELECT * FROM `users` WHERE `Group`=".$group_id." AND `Simple_user`=1");
 			$num_users=mysql_num_rows($users);
 			if($num_users>0){
-			echo '<li><input type="checkbox" name="check_group[]" value="'.$group_id.'">'.$group_name.'</input>';
-				echo '<ul>';
+			echo '<input type="checkbox" name="check_group[]" value="'.$group_id.'">'.$group_name.'</input>';
+				echo '<fieldset>';
 				if($num_users==1){
 					$user=mysql_fetch_array($users); 
-					echo '<li><input type="checkbox" name="check_user[]" value="'.$user[ID].'">'.$user[Name].'</li>';
+					echo '<input type="checkbox" name="check_user[]" value="'.$user[ID].'">'.$user[Name];
 				} else {
 					for($ii=0;$ii<$num_users;$ii++){
 						$user=mysql_fetch_object($users);
-					echo '<li><input type="checkbox" name="check_user[]" value="'.$user->ID.'">'.$user->Name.'</li>';
+					echo '<input type="checkbox" name="check_user[]" value="'.$user->ID.'">'.$user->Name.'<br>';
 					}
 				 } 
 			}
-			echo '</ul></li>';
+			echo '</fieldset>';
 	}	
 	?>
 	</ul></div>
-	<div><b>Выберите тест(ы)</b><ul>
+	<div><b>Выберите тест(ы)</b>
 	<?
 	$all_subjects=mysql_query("SELECT * FROM `subjects`") or die("Invalid query: ".mysql_error());
 	$subjects_amount=mysql_num_rows($all_subjects);
@@ -98,27 +99,25 @@ visibility: hidden; !important}
 			$num_tests=mysql_num_rows($tests);
 			
 			if($num_tests>0){
-			echo '<li><input type="checkbox" name="check_subj[]" value="'.$subj_id.'">'.$subj_name.'</input>';
-				echo '<ul>';
+			echo '<input type="checkbox" name="check_subj[]" value="'.$subj_id.'">'.$subj_name.'</input>';
+				echo '<fieldset>';
 				if($num_tests==1){
 					$test=mysql_fetch_array($tests); 
-					echo '<li><input type="checkbox" name="check_test[]" value="'.$test[ID].'">'.$test[Name].'</li>';
+					echo '<input type="checkbox" name="check_test[]" value="'.$test[ID].'">'.$test[Name];
 				} else {
-				echo '<fieldset>';
 					for($c=0;$c<$num_tests;$c++){
 						$test=mysql_fetch_object($tests);
-					echo '<li>
-					<input type="checkbox" name="check_test[]" value="'.$test->ID.'">'.$test->Name.'</li>';
+					echo '<input type="checkbox" name="check_test[]" value="'.$test->ID.'">'.$test->Name.'<br>';
 					} echo '</fieldset>';
 				 } 
 			}
-			echo '</ul></li>';
 	}
 	?>
-	</ul></div>
+	</div>
 	<div><table width="100%"><tr>
 	<td>Дата начала теста<br><input type="date" name="start" required></td><!-- подумать как сделать, чтоб было во всех браузерах -->
 	<td>Дата окончания теста<br><input type="date" name="finish" required></td>
+	<td valign="bottom"><input type="checkbox" name="makenotices">Оповестить пользователей о начале теста</input></td>
 	<td><input onClick="return confirm('Проверьте заполнение всех полей! Подтвердите сохранение ')" type="submit" name="maketrial" value="Сохранить"></td>
 	<td><input type="reset" name="reset" value="Сбросить"></td>
 	</tr></table></div>
@@ -136,7 +135,7 @@ echo $_SESSION['msg'];
 	 ?>
 </div>
 <div>
-<table border=1 cellspacing=0 width="80%">
+<table border=1 cellspacing=0 width="1000px">
 <caption>Назначенные тестовые испытания:</caption>
 <thead>
 <tr><td>&nbsp;</td><td>Назначено пользователю: </td><td>Название теста</td><td>Дата начала</td><td>Дата окончания</td><td>Отметка о<br> прохождении</td>

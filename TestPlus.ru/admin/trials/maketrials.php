@@ -9,12 +9,16 @@ include ("../../link.php");
 		header("Location: index.php");
 	exit();
 	}//сохранение тестовых испытаний по результатам отбора формы
-//при неправильном заполнении выбрасываем:
+
+	
+//обракботчик fMakeTrial	
+	
 if(!isset($_POST['maketrial'])){
 	$_SESSION['msg']="Ошибка сохранения!<br>";
 	header("Location: index.php");
 	exit();
 }
+//при неправильном заполнении выбрасываем:
 if((!isset($_POST['check_user']))&&(!isset($_POST['check_group']))){
 	$_SESSION['msg']="Ошибка: не выбраны пользователи! Невозможно сформировать задание <br>";
 	header("Location: index.php");
@@ -25,6 +29,7 @@ if((!isset($_POST['check_test']))&&(!isset($_POST['check_subj']))){
 	header("Location: index.php");
 	exit();
 }
+
 //получаем результаты формы
 if(isset($_POST['check_group'])) $arr_gr = $_POST['check_group'];
 if(isset($_POST['check_user'])) $arr_users = $_POST['check_user'];
@@ -93,10 +98,13 @@ for($i=0;$i<count($users);$i++){
 	}
 }
 //для отладки echo 'created: '.$num_created.' trials';
-if($num_created ==(count($users)*count($tests))) $_SESSION['msg']='Все записи по запросу сохранены успешно';
+if($num_created ==(count($users)*count($tests))) 
+	$_SESSION['msg']='Все записи по запросу сохранены успешно<br>';
 else {
-	if($num_created==0) $_SESSION['msg']='Новых записей не создано. Проверьте запрос, возможно задания уже существуют';
-	else $_SESSION['msg']='Не удалось сохранить некоторые записи. Проверьте запрос, возможно задания уже существуют';
+	if($num_created==0) $_SESSION['msg']='Новых записей не создано. Проверьте запрос, возможно задания уже существуют<br>';
+	else $_SESSION['msg']='Не удалось сохранить некоторые записи. Проверьте запрос, возможно задания уже существуют<br>';
 }
+if(isset($_POST['makenotices']))
+	SendNotice($date_start,$date_end);
 header("Location: index.php");
 ?>
