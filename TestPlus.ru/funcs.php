@@ -241,7 +241,7 @@ function EditUsers($id,$just_show){
 	<tr><td>Имя </td><td><input type="text" '.$disabled.' value="'.$str["Name"].'" name="name"></input></td></tr>
 	<tr><td>Логин </td><td><input type="text" '.$disabled.' value="'.$str["Login"].'" name="login"></input></td></tr>
 	<tr><td>Пароль </td><td><input type="password" '.$disabled.' value="'.$str["Password"].'" name="password"></input></td></tr>
-	<tr><td>E-mail </td><td><input type="email" '.$disabled.' name="email" value='.$str["E-mail"].'></input></td></tr>
+	<tr><td>E-mail </td><td><input type="email" '.$disabled.' name="email" value='.$str["Email"].'></input></td></tr>
 	<tr><td>Группа пользователя</td> <td>
 	<select name="select_group" '.$disabled.'><option selected value='.$str["Group"].'>'.$n_g['Name'].'</option>';
 	for($i=0;$i<$n_groups;$i++){
@@ -262,10 +262,10 @@ function EditUsers($id,$just_show){
 function SaveUser($id,$name,$login,$password,$email,$group,$adm,$usr){
 
 	if($id){
-		$save_user=mysql_query("UPDATE `Users` SET `Name`='$name', `Login`='$login', `Password`='$password', `E-mail`='$email', `Group`='$group',`Admin`='$adm',`Simple_user`='$usr' WHERE `ID`='$id'") or die("Invalid query: " .mysql_error());
+		$save_user=mysql_query("UPDATE `Users` SET `Name`='$name', `Login`='$login', `Password`='$password', `Email`='$email', `Group`='$group',`Admin`='$adm',`Simple_user`='$usr' WHERE `ID`='$id'") or die("Invalid query: " .mysql_error());
 		header("Location: index.php");
 	} else {
-		$save_user=mysql_query("INSERT INTO `Users` (`ID`,`Name`,`Login`,`Password`,`E-mail`,`Group`,`Admin`,`Simple_user`) VALUES ('$id','$name','$login','$password','$email','$group','$adm','$usr')");
+		$save_user=mysql_query("INSERT INTO `Users` (`ID`,`Name`,`Login`,`Password`,`Email`,`Group`,`Admin`,`Simple_user`) VALUES ('$id','$name','$login','$password','$email','$group','$adm','$usr')");
 		header("Location: index.php");
 	}
 	if($save_user)$_SESSION['msg']='Изменения сохранены успешно'; else $_SESSION['msg']='Ошибка операции с БД';
@@ -723,16 +723,47 @@ return 1;
 }
 
 function SendNotice($from,$to){
+	//определим общие параметры
+	$get_service_param=mysql_query("SELECT * FROM `service`") or die("Invalid query: " .mysql_error());;
+	if(mysql_num_rows($get_service_param)!=1){
+		$_SESSION['msg']="Ошибка таблицы service";
+		return 0;
+		} else
+			$service_param=mysql_fetch_array($get_service_param) or die("Invalid query: " .mysql_error());;
+	$title=$service_param['title'];
+	$content=$service_param['content'];
+	$from_mail=$service_param['email'];
+	//текст для сообщения о тесте
+	$content.='\n\r Необходимо пройти тест: ';
 	//если выбран период, то выводим записи по периоду
-	if(($from!='')&&($to!='')) 
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='$from' AND `Date_end`<='$to' AND `Passed`=0");
-	else if($from!='')
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='$from' AND `Passed`=0");
+if(($from!='')&&($to!='')) 
+$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='$from' AND `Date_end`<='$to' AND `Passed`=0") or die("Invalid query: ".mysql_error());
+else if($from!='')
+	$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>='$from' AND `Passed`=0") or die("Invalid query: " .mysql_error());
 	else if($to!='')
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_end`<='to' AND `Passed`=0");
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_end`<='to' AND `Passed`=0") or die("Invalid query: " .mysql_error());
 	else  //если период не выбран
-		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>=0 AND `Passed`=0");
-	
+		$select_trials=mysql_query("SELECT * FROM `trials` WHERE `Date_start`>=0 AND `Passed`=0") or die("Invalid query: " .mysql_error());
+	if(mysql_num_rows($select_trials)==0){
+		$_SESSION['msg']='В данном периоде нет активных заданий на тестирование<br>';
+		return 0;
+	}
+	while($trial=mysql_fetch_assoc($select_trials)){
+		$get_user_info=mysql_query("SELECT `Name`,`Email` FROM `users` WHERE `ID`='".$trial["User_id"]."'") or die("Invalid query: " .mysql_error());
+		$user_info=mysql_fetch_array($get_user_info);
+		if($user_info){
+			$usr_name=$user_info['Name'];
+			$mail=$user_info['Email'];
+			}
+		$test_info=GetTestInfo($trial["Test_id"]);
+		$content.=$test_info["Name"];
+		if($mail){
+			if(mail($mail, $title, $content, 'From:'.$from_mail))
+				$_SESSION['msg'].='Отправлено пользователю '.$usr_name.' успешно<br>';
+			else $_SESSION['msg'].='Не удалось отправить пользователю '.$usr_name.'<br>';
+		} else $_SESSION['msg'].='Не определен адрес пользователюя '.$usr_name.'<br>';
+	}
+		return 1;
 
 }
 

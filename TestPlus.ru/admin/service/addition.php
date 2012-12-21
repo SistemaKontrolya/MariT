@@ -18,10 +18,12 @@ if((mysql_num_rows($get_info))<=1){
 	$info=mysql_fetch_array($get_info);
 	$mail=$info['email'];
 	$content=$info['content'];
+	$title=$info['title'];
 	}
 	echo '<form name="additional" action="service.php" method="POST">
 	<table><tr>
 	<td>Адрес почты администратора: </td><td><input type="e-mail" name="admin_mail" value="'.$mail.'" size="50"></td></tr>
+	<td>Тема письма: </td><td><input type="text" name="mail_title" value="'.$title.'" size="50"></td></tr>
 	<tr><td valign="top">Заголовок письма: </td><td rowspan="2"><textarea name="mail_content" cols="39" rows="10">'.$content.'</textarea></td></tr>
 	<tr><td valign="bottom"><input type="image" src="/pic/save_32.png" name="save_info" value="сохранить"></input></td></tr>
 	</table>
