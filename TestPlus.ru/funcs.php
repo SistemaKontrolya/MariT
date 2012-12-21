@@ -294,10 +294,10 @@ function ShowSubjects(){
 	echo '<h1>Темы тестирования: </h1>';
 	if ($subjects_amount==0) echo 'Пока нет ни одной темы';
 	else{
-		echo '<ul>';		
+		echo '<ul  style="list-style-type: none;">';		
 		for($i;$i<$subjects_amount;$i++){
 		$subject=mysql_fetch_object($get_subjects);
-		echo "<li style='list-style-type: none;'>
+		echo "<li class='regular_list''>
 			<a href='?edit=1&id=".$subject->ID."'><img src='/pic/pencil_16.png' alt=' редактировать ' title='редактировать тему'></a>
 			".$subject->Name;
 			if(isset($_GET['edit'])&&($_GET['id']==$subject->ID))EditSubject($subject->ID,$subject->Name);
@@ -316,13 +316,17 @@ function EditSubject($subject_id,$subject_name){
 	$get_subjects=mysql_query("SELECT * FROM `subjects`");
 	$subjects_amount=mysql_num_rows($get_subjects);
 		echo '
+		<div width="300px" class="edit_subj">
+		<a href="index.php"><img title="Закрыть" alt="отмена" src="/pic/close_mini.png"></a>
 		<form name="edit_subject" action="editsubject.php" method="POST">
 		<input type="text" name="id" value="'.$subject_id.'" hidden></input>
 		<input type="text" name="name" value="'.$subject_name.'"></input>
-		<button type="submit" name="save"><img src="/pic/save_16.png" alt="Сохранить" title="Сохранить"></button>
-		<a href="delsubject.php?id='.$subject_id.'" onClick="return confirm(\'Внимание! Тема '.$subject_name.' будет удалена. Вы согласны?\')"><button type="button"><img src="/pic/delete_16.png" alt="delete" ></button></a>
-		</br>
-		</form>';
+		<button type="submit" name="save"><img src="/pic/save_16.png" alt="Сохранить" title="Сохранить"></button>';
+		if($subject_id){
+		echo '<a href="delsubject.php?id='.$subject_id.'" onClick="return confirm(\'Внимание! Тема '.$subject_name.' будет удалена. Вы согласны?\')" title="Удалить"><button type="button"><img src="/pic/delete_16.png" alt="delete"></button></a>';
+		}
+		echo '</br>
+		</form></div>';
 }
 
 function SaveSubject($subject_id,$subject_name){

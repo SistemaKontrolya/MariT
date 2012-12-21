@@ -42,7 +42,16 @@ ul#service{display: none;}
 }
 li a{
 	text-decoration: none;}
+
 ul{list-style-type:none;}
+
+a button{
+	margin:0;
+}
+a input {
+	margin:0;
+}
+
 form {
 	text-align: left;	
 }
@@ -79,4 +88,20 @@ li.regular_list a:hover {
 }
 li.regular_list a:hover img{
 	background-color:#cccccc;
+}
+
+.edit_subj{
+	background: #cccccc;
+	width: 70%;
+	text-align: right;
+}
+.edit_subj form{
+	text-align: left;
+}
+.edit_subj form input{
+	width: 85%;
+	font-size: 1.2em;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	padding-left:3px;
 }
