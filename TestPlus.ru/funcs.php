@@ -362,7 +362,6 @@ function ShowTests($selected_subj){
 			ShowBySubj($subj->ID,"");
 		}
 	}
-	//echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='/admin/tests/?edit=1&id='>Создать новый тест</a></li></ul>";
 }
 
 function ShowBySubj($subject,$selected){
@@ -372,15 +371,15 @@ function ShowBySubj($subject,$selected){
  echo '<ul style="list-style-type: none;"><b>'.$subj_name["Name"].'</b>';
  $tests_list=mysql_query("SELECT `ID`,`Name` FROM `tests` WHERE `Subject`='$subject'") or die("Invalid query: ".mysql_error());
  $test_amount=mysql_num_rows($tests_list);
- if(!$test_amount) echo '<li>Для этой темы нет тестов</li></ul>';
+ if(!$test_amount) echo '<li class="regular_list">Для этой темы нет тестов</li>';
  for($i;$i<$test_amount;$i++){
 		$test=mysql_fetch_object($tests_list);
-		echo '<li><a href="?subject='.$subject.$choise.'&edit=1&id='.$test->ID.'"><img src="/pic/pencil_16.png" alt=" редактировать " title="редактировать тест"></a>
-		 <a href="?subject='.$subject.$choise.'&show=1&id='.$test->ID.'">'.$test->Name.'</a>
+		echo '<li class="regular_list"><a href="?subject='.$subject.$choise.'&edit=1&id='.$test->ID.'#edit"><img src="/pic/pencil_16.png" alt=" редактировать " title="редактировать тест"></a>
+		 <a href="?subject='.$subject.$choise.'&show=1&id='.$test->ID.'#edit">'.$test->Name.'</a>
 		</li>';
 	}
-		echo "<li style='list-style-image: url(/pic/plus_16.png)'><a href='?subject=".$subject.$choise."&edit=1&id='>Создать новый тест</a></li></ul>";
-		echo '</ul>';
+		echo "<li class='regular_list' style='list-style-image: url(/pic/plus_16.png);'><a href='?subject=".$subject.$choise."&edit=1&id=#edit'>Создать новый тест</a></li></ul>";
+
 }
 
 function GetTestInfo($id){
@@ -408,8 +407,7 @@ function EditTest($test_id,$just_show){
 	$amount_questions=mysql_num_rows($questions);
 	if(isset($_GET['choise']))$choise='&choise=OK';
 	echo '<div class="edit">';
-	if(!$just_show)
-		echo '<a href="deltest.php?id='.$test_id.'" onClick="return confirm(\'Внимание! Тест '.$test["Name"].' будет удален. удаление теста повлечет за собой удаление связанных ВОПРОСОВ И ОТВЕТОВ, а также назначенных ЗАДАНИЙ для тестирования! Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete" style="vertical-align: middle"></a>';
+	echo'<a href="?subject='.$test["Subject"].$choise.'"#edit"><img src="/pic/close.png" alt="Отмена" title="Закрыть"></a>';
 	echo '<form name=fEditTest action="savetest.php" method="POST">
 	<table>
 	<tr><td>ID</td><td>	<input type="text" readonly="readonly" value="'.$test["ID"].'" name="id"></input></td></tr>
@@ -421,17 +419,21 @@ function EditTest($test_id,$just_show){
 			echo '<option value="'.$subject->ID.'">'.$subject->Name.'</option>';
 	}
 	echo '</select></td></tr>
-	<tr><td>Количество вопросов <br>в сеансе</td><td><input size="2" type="test" '.$disabled.' name="quest_amount" value="'.$test["Questions"].'"></input></td></tr>
-	<tr><td>Необходимое количество <br>верных ответов</td><td><input size="2" type="test" '.$disabled.' name="ans_amount" value="'.$test["Answers"].'"></input></td></tr>
-	<tr><td colspan="2"><a href="?subject='.$test["Subject"].$choise.'&showquestions=1&id='.$test_id.'">Список вопросов теста</a></td></tr>';
-	if($amount_questions<$test["Questions"]) echo '<span class="warning">ВНИМАНИЕ! Количество введенных вопросов меньше, <br>чем указано в тесте. Тестирование не будет недоступно</span>';
-	echo '<tr><td colspan="2"><a href="?subject='.$test["Subject"].$choise.'&showtrial=1&id='.$test_id.'">Пробное тестирование</a></td></tr>
-	<tr><td colspan="2"> Комментарий <br><textarea name="commt" '.$disabled.' cols="40">'.$test["Comment"].'</textarea></td></tr>
-	<tr><td>&nbsp;</td><td>';
-	if(!$just_show)
+	<tr><td>Количество<br>вопросов<br>в сеансе</td><td><input size="2" type="test" '.$disabled.' name="quest_amount" value="'.$test["Questions"].'"></input></td></tr>
+	<tr><td>Необходимое<br>количество<br>верных ответов</td><td><input size="2" type="test" '.$disabled.' name="ans_amount" value="'.$test["Answers"].'"></input></td></tr>
+	<tr><td colspan="2"><a href="?subject='.$test["Subject"].$choise.'&showquestions=1&id='.$test_id.'#edit">Список вопросов теста</a></td></tr>';
+	if($amount_questions<$test["Questions"]) echo '<span class="warning">ВНИМАНИЕ! Количество введенных вопросов меньше, <br>чем указано в тесте. Тестирование будет недоступно</span>';
+	echo '<tr><td colspan="2"><a href="?subject='.$test["Subject"].$choise.'&showtrial=1&id='.$test_id.'#edit">Пробное тестирование</a></td></tr>
+	<tr><td colspan="2"> Комментарий <br><textarea name="commt" '.$disabled.' cols="30">'.$test["Comment"].'</textarea></td></tr>
+	<tr><td>&nbsp;</td><td align="right">';
+	if(!$just_show){
+		if($test_id){
+			echo '<a href="deltest.php?id='.$test_id.'"><button onClick="return confirm(\'Внимание! Тест '.$test["Name"].' будет удален. удаление теста повлечет за собой удаление связанных ВОПРОСОВ И ОТВЕТОВ, а также назначенных ЗАДАНИЙ для тестирования! Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete"></button></a>';
+			}
 		echo '<button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button>';
+		}
 	echo '&nbsp;</td></tr></table></form>';
-	echo'<a href="?subject='.$test["Subject"].$choise.'"><button>Отмена</button></a></div>';
+	echo '</div>';
 }
 
 function SaveTest($id, $name, $select_subject, $quest_amount, $ans_amount, $commt){
@@ -476,8 +478,8 @@ function ShowQuestions($test_id){
 	$test_name=mysql_fetch_array($test_owner);
 	$questions=mysql_query("SELECT Content,ID FROM `Questions` WHERE `Test_owner`='$test_id'");
 	$amount_questions=mysql_num_rows($questions);
-	if(!$amount_questions) echo 'К этому тесту нет привязанных вопросов<br>';
-	echo '<a href="'.$_SESSION['location'].'&new_question=1"><img src="/pic/plus_16.png">Создать новый вопрос</a>';
+	if(!$amount_questions) echo '<span class="warning">К этому тесту нет привязанных вопросов</span><br>';
+	echo '<a href="'.$_SESSION['location'].'&new_question=1#edit"><img src="/pic/plus_16.png">Создать новый вопрос</a>';
 	if(isset($_GET['new_question'])){
 		echo '<div><form name="new_question" action="savequestion.php" method="POST"><input type="text" name="owner" value="'.$test_id.'" hidden></input>
 		<textarea name="content" cols="57" rows="3" autofocus></textarea><br>
@@ -488,22 +490,21 @@ function ShowQuestions($test_id){
 	$thisPage = $_SERVER['REQUEST_URI']; 
 	for($i;$i<$amount_questions;$i++){
 		$question=mysql_fetch_object($questions);
-		echo '<li><a href="'.$_SESSION['location'].'&question='.$question->ID.'">'.$question->Content.'</a></li>';
+		echo '<li><a href="'.$_SESSION['location'].'&question='.$question->ID.'#edit">'.$question->Content.'</a></li>';
 	}
 	echo '</ul></div>';
 }
 
 function EditQuestion($id){
-	//$thisPage = $_SERVER['REQUEST_URI']; 
 	$select_questions=mysql_query("SELECT * FROM `questions` WHERE `ID`='$id'") or die("Invalid query: ".mysql_error());
 	$question_info=mysql_fetch_array($select_questions);
 	$select_answers=mysql_query("SELECT * FROM `answers` WHERE `Question_owner`='$id'");
 	$answers_amount=mysql_num_rows($select_answers);
 	echo '<div><form name="fEditQuestion" action="savequestion.php" method="POST">
-	<input type="text" name="owner" hidden value="'.$id.'"></input>
+	<input type="hidden" name="owner" value="'.$id.'"></input>
 	Вопрос:<br>
 	<textarea name="question" cols="60" rows="3">'.$question_info["Content"].'</textarea><br>
-	<input type="text" hidden name="question_id" value="'.$question_info["ID"].'"></input>';
+	<input type="hidden" name="question_id" value="'.$question_info["ID"].'"></input>';
 	if(!$answers_amount) echo "Не введено ни одного ответа<br>Введите ";
 		echo 'варианты ответов: <br>';
 		//выводим 6 полей для редактирования. если ответа еще нет, поле пустое
@@ -511,7 +512,7 @@ function EditQuestion($id){
 		$answer=mysql_fetch_object($select_answers);
 		$checked="";
 		 if(($answer->correct)==1) $checked='checked';
-		echo '<input type="text" hidden name="answer_num'.$i.'" value="'.$answer->ID.'"></input>
+		echo '<input type="hidden" name="answer_num'.$i.'" value="'.$answer->ID.'"></input>
 		<input type="radio" name="correct" value="'.$i.'" '.$checked.' title="Выберите правильный ответ с помощью переключателя"></input>
 		<textarea cols="57" rows="1" name="answer_cont'.$i.'">'.$answer->Content.'</textarea><span></span><br>';
 		}

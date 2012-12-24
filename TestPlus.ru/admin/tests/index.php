@@ -35,7 +35,7 @@ include ("../admin_header.php");
 	<input type="submit" name="choise" value="OK"></input>
 </form>
 </div>
-</div>
+<div>
 <div>
 <?php
 if(isset($_GET['choise'])){
@@ -49,16 +49,21 @@ if(isset($_SESSION['msg'])){
 	echo $_SESSION['msg'];
 	$_SESSION['msg']=NULL;}
 ?>
-<!-- cтиль временный, только для удобства проверки-->
-<div style="float: left; position: relative; top: -250px; left: 400px; ">
+</div>
+<a name="edit"></a>
+<div>
 <?
 if(isset($_GET['showquestions'])) {
 $_SESSION['location']="?subject=".$_GET['subject']."".$choise."&showquestions=1&id=".$_GET['id'];
-ShowQuestions($_GET['id']);}
-
+echo '<div class="edit">';
+ShowQuestions($_GET['id']);
+echo '</div>';
+}
 if(isset($_GET['question'])) {
+	echo '<div class="add">';
 	$_SESSION['location']="?subject=".$_GET['subject']."".$choise."&showquestions=1&id=".$_GET['id'];
 	EditQuestion($_GET['question']);
+	echo '</div>';
 	}
 if(isset($_GET['showtrial'])){
 	if(MakeTesting($_GET['id'])){

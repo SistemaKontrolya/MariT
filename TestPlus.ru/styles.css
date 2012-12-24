@@ -55,14 +55,26 @@ a input {
 form {
 	text-align: left;	
 }
+
+select{
+	width: 160px;
+}
+
 .edit {   /* класс для блоков редактирования элементов*/
-	width: 20%;
+	width: 25%;
 	text-align: right;
-	background: grey;
 	margin:0;
 	position:relative;
 	display:inline-block;
 	
+}
+
+.edit form{
+	width:90%;
+}
+
+.edit form table{
+	width:90%;
 }
 
 .main{  /* класс для блока, где выводится основная информация страницы*/
@@ -104,4 +116,12 @@ li.regular_list a:hover img{
 	margin-left: 10px;
 	margin-bottom: 10px;
 	padding-left:3px;
+}
+.warning{
+	color: red;
+}
+
+.add{
+	display: inline;
+	float:right;
 }
