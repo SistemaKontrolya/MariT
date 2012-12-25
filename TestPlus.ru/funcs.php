@@ -342,11 +342,18 @@ function SaveSubject($subject_id,$subject_name){
 function DeleteSubject($subject_id){
 	if($subject_id){
 		//добавить проверку на наличие подчиненных тестов
-		$delete=mysql_query("DELETE FROM `Subjects` where `ID`='$subject_id'");
-		(!$delete)or($_SESSION['msg']='Тема удалена успешно');}
+	$tests_list=mysql_query("SELECT `ID` FROM `tests` WHERE `Subject`='$subject_id'") or die("Invalid query: ".mysql_error());
+	$test_amount=mysql_num_rows($tests_list);
+	if(!$test_amount){
+		$delete=mysql_query("DELETE FROM `Subjects` WHERE `ID`='$subject_id'");
+		(!$delete)or($_SESSION['msg']='Тема удалена успешно');
+		}
+		else {
+			$_SESSION['msg']='Для этой темы есть привязанные тесты. Удаление невозможно';
+		}
+	}
 	header("Location: index.php");
 }
-
 
 function ShowTests($selected_subj){
 	echo "<h1>Список тестов: </h1><br>";

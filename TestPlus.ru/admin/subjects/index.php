@@ -12,6 +12,12 @@ include ("../admin_header.php");
 </head>
 <body>
 <?include ("../cap.php");?>
+<div class="service">
+<?if(isset($_SESSION['msg']))
+	echo $_SESSION['msg'];
+ $_SESSION['msg']='';
+?>
+</div>
 <div>
 <?php
 ShowSubjects();
