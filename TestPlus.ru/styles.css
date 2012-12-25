@@ -80,7 +80,6 @@ select{
 .main{  /* класс для блока, где выводится основная информация страницы*/
 	width: 60%;
 	margin:0;
-	background: yellow;
 	position:relative;
 	float:left;
 }
