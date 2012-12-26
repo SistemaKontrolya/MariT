@@ -446,10 +446,8 @@ function EditTest($test_id,$just_show){
 function SaveTest($id, $name, $select_subject, $quest_amount, $ans_amount, $commt){
 	if($id){
 		$save_test=mysql_query("UPDATE `Tests` SET `Name`='$name', `Subject`='$select_subject', `Questions_amount`='$quest_amount', `Cor_ans_amount`='$ans_amount', `Comment`='$commt' WHERE `ID`='$id'") or die("Invalid query: " .mysql_error());
-		header("Location: index.php");
-	} else {
+		} else {
 		$save_test=mysql_query("INSERT INTO `Tests` (`ID`,`Name`,`Subject`,`Questions_amount`,`Cor_ans_amount`,`Comment`) VALUES ('$id','$name','$select_subject','$quest_amount','$ans_amount','$commt')");
-		header("Location: index.php");
 	}
 	if($save_test)
 		$_SESSION['msg']='Изменения сохранены успешно'; 

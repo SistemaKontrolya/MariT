@@ -4,6 +4,7 @@ include ("../../link.php");
 $submit=$_POST['save'];
 if(isset($submit))
 	SaveTest($_POST['id'], $_POST['name'], $_POST['select_subject'], $_POST['quest_amount'], $_POST['ans_amount'], $_POST['commt']);
+header("Location: index.php");
 ?>
 <!DOCTYPE html>
 <html>
