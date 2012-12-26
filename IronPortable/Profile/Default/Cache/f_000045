@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head profile="http://purl.org/NET/erdf/profile">
+ <title>PHP: mysqli - Manual</title>
+ <style type="text/css" media="all">
+  @import url("http://static.php.net/www.php.net/styles/site.css");
+  @import url("http://static.php.net/www.php.net/styles/phpnet.css");
+  
+ </style>
+ <!--[if IE]><![if gte IE 6]><![endif]-->
+  <style type="text/css" media="print">
+   @import url("http://static.php.net/www.php.net/styles/print.css");
+  </style>
+ <!--[if IE]><![endif]><![endif]-->
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+ <link rel="shortcut icon" href="http://static.php.net/www.php.net/favicon.ico" />
+ <link rel="contents" href="index.php" />
+ <link rel="index" href="set.mysqlinfo.php" />
+ <link rel="prev" href="changelog.mysql.php" />
+ <link rel="next" href="intro.mysqli.php" />
+ <link rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
+ <link rel="schema.rdfs" href="http://www.w3.org/2000/01/rdf-schema#" />
+ <link rev="canonical" rel="self alternate shorter shorturl shortlink" href="http://php.net/mysqli" />
+ <link rel="license" href="http://creativecommons.org/licenses/by/3.0/" about="#content" />
+ <link rel="alternate" href="/manual/en/feeds/book.mysqli.atom" type="application/atom+xml" />
+ <link rel="canonical" href="http://php.net/manual/ru/book.mysqli.php" />
+ <script type="text/javascript" src="http://static.php.net/www.php.net/userprefs.js"></script>
+ <base href="http://www.php.net/manual/ru/book.mysqli.php" />
+ <meta http-equiv="Content-language" content="ru" />
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var toggleImage = function(elem) {
+        if ($(elem).hasClass("shown")) {
+            $(elem).removeClass("shown").addClass("hidden");
+            $("img", elem).attr("src", "/images/notes-add.gif");
+        }
+        else {
+            $(elem).removeClass("hidden").addClass("shown");
+            $("img", elem).attr("src", "/images/notes-reject.gif");
+        }
+    };
+
+    $(".soft-deprecation-notice h1.title").each(function() {
+        $(this).prepend("<a class='toggler shown' href='#'><img src='/images/notes-reject.gif' alt='minimize' /></a> ");
+    });
+    $(".refsect1 h3.title").each(function() {
+        url = "https://bugs.php.net/report.php?bug_type=Documentation+problem&amp;manpage=" + $(this).parent().parent().attr("id") + "%23" + $(this).parent().attr("id");
+        $(this).parent().prepend("<div class='reportbug'><a href='" + url + "'>Report a bug</a></div>");
+        $(this).prepend("<a class='toggler shown' href='#'><img src='/images/notes-reject.gif' alt='reject note' /></a> ");
+    });
+    $("#usernotes .head").each(function() {
+        $(this).prepend("<a class='toggler shown' href='#'><img src='/images/notes-reject.gif' alt='reject note' /></a> ");
+    });
+    $(".soft-deprecation-notice h1.title .toggler").click(function() {
+        $(this).parent().siblings().slideToggle("slow");
+        toggleImage(this);
+        return false;
+    });
+    $(".refsect1 h3.title .toggler").click(function() {
+        $(this).parent().siblings().slideToggle("slow");
+        toggleImage(this);
+        return false;
+    });
+    $("#usernotes .head .toggler").click(function() {
+        $(this).parent().next().slideToggle("slow");
+        toggleImage(this);
+        return false;
+    });
+});
+</script>
+
+</head>
+<body>
+
+<div id="headnav">
+ <a href="/" rel="home"><img src="http://static.php.net/www.php.net/images/php.gif"
+ alt="PHP" width="120" height="67" id="phplogo" /></a>
+ <div id="headmenu">
+  <a href="/downloads.php">downloads</a> |
+  <a href="/docs.php">documentation</a> |
+  <a href="/FAQ.php">faq</a> |
+  <a href="/support.php">getting help</a> |
+  <a href="/mailing-lists.php">mailing lists</a> |
+  <a href="/license">licenses</a> |
+  <a href="https://wiki.php.net/">wiki</a> |
+  <a href="https://bugs.php.net/">reporting bugs</a> |
+  <a href="/sites.php">php.net sites</a> |
+  <a href="/conferences/">conferences</a> |
+  <a href="/my.php">my php.net</a>
+ </div>
+</div>
+
+<div id="headsearch">
+ <form method="post" action="/search.php" id="topsearch">
+  <p>
+   <span title="Keyboard shortcut: Alt+S (Win), Ctrl+S (Apple)">
+    <span class="shortkey">s</span>earch for
+   </span>
+   <input type="text" name="pattern" value="" size="30" accesskey="s" />
+   <span>in the</span>
+   <select name="show">
+    <option value="all"      >all php.net sites</option>
+    <option value="local"    >this mirror only</option>
+    <option value="quickref" selected="selected">function list</option>
+    <option value="manual"   >online documentation</option>
+    <option value="bugdb"    >bug database</option>
+    <option value="news_archive">Site News Archive</option>
+    <option value="changelogs">All Changelogs</option>
+    <option value="pear"     >just pear.php.net</option>
+    <option value="pecl"     >just pecl.php.net</option>
+    <option value="talks"    >just talks.php.net</option>
+    <option value="maillist" >general mailing list</option>
+    <option value="devlist"  >developer mailing list</option>
+    <option value="phpdoc"   >documentation mailing list</option>
+   </select>
+   <input type="image"
+          src="http://static.php.net/www.php.net/images/small_submit_white.gif"
+          class="submit" alt="search" />
+   <input type="hidden" name="lang" value="ru" />
+  </p>
+ </form>
+</div>
+
+<div id="layout_2">
+ <div id="leftbar">
+<!--UdmComment-->
+<ul class="toc">
+ <li class="header home"><a href="index.php">PHP Manual</a></li>
+ <li class="header up"><a href="funcref.php">Справочник функций</a></li>
+ <li class="header up"><a href="refs.database.php">Расширения для работы с базами данных</a></li>
+ <li class="header up"><a href="refs.database.vendors.php">Расширения для работы с базами данных отдельных производителей</a></li>
+ <li class="header up"><a href="set.mysqlinfo.php">MySQL</a></li>
+ <li><a href="mysql.php">Overview of the MySQL PHP drivers</a></li>
+ <li><a href="book.mysql.php">Mysql</a></li>
+ <li class="active"><a href="book.mysqli.php">mysqli</a></li>
+ <li><a href="book.mysqlnd.php">Mysqlnd</a></li>
+ <li><a href="book.mysqlnd-ms.php">mysqlnd_<span class="w"> </span>ms</a></li>
+ <li><a href="book.mysqlnd-qc.php">mysqlnd_<span class="w"> </span>qc</a></li>
+ <li><a href="book.mysqlnd-uh.php">mysqlnd_<span class="w"> </span>uh</a></li>
+ <li><a href="book.mysqlnd-mux.php">mysqlnd_<span class="w"> </span>mux</a></li>
+</ul><!--/UdmComment-->
+
+ </div>
+ <div id="content" class="manual/ru">
+<!--UdmComment-->
+<div class="manualnavbar manualnavbar_top">
+ <span class="next">
+  <a href="intro.mysqli.php">Введение<img src="http://static.php.net/www.php.net/images/caret-r.gif" alt="&gt;" width="11" height="7" /></a>
+ </span>
+ <span class="prev">
+  <a href="changelog.mysql.php"><img src="http://static.php.net/www.php.net/images/caret-l.gif" alt="&lt;" width="11" height="7" />Список изменений</a>
+ </span>
+ <hr />
+ <span class="lastupdated">[<a href="https://edit.php.net/?project=PHP&amp;perm=ru/book.mysqli.php">edit</a>] Last updated: Fri, 09 Nov 2012</span>
+ <div class="langchooser">
+  <form action="/manual/change.php" method="get">
+   <p>view this page in </p><fieldset><select name="page">
+    <option value="en/book.mysqli.php">English</option>
+    <option value="pt_BR/book.mysqli.php">Brazilian Portuguese</option>
+    <option value="zh/book.mysqli.php">Chinese (Simplified)</option>
+    <option value="fr/book.mysqli.php">French</option>
+    <option value="de/book.mysqli.php">German</option>
+    <option value="it/book.mysqli.php">Italian</option>
+    <option value="ja/book.mysqli.php">Japanese</option>
+    <option value="pl/book.mysqli.php">Polish</option>
+    <option value="ro/book.mysqli.php">Romanian</option>
+    <option value="fa/book.mysqli.php">Persian</option>
+    <option value="es/book.mysqli.php">Spanish</option>
+    <option value="tr/book.mysqli.php">Turkish</option>
+    <option value="help-translate.php">Other</option>
+   </select>
+   <input type="image" src="http://static.php.net/www.php.net/images/small_submit.gif" id="changeLangImage" alt="Change language" />
+  </fieldset></form>
+ </div>
+</div>
+<!--/UdmComment-->
+
+<div id="book.mysqli" class="book">
+ 
+ 
+ <h1 class="title">Улучшенный модуль MySQL</h1>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+ 
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+ 
+ 
+ 
+
+
+ 
+
+
+ 
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+ 
+<ul class="chunklist chunklist_book"><li><a href="intro.mysqli.php">Введение</a></li><li><a href="mysqli.overview.php">Overview</a></li><li><a href="mysqli.quickstart.php">Quick start guide</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli.quickstart.dual-interface.php">Dual procedural and object-oriented interface</a></li><li><a href="mysqli.quickstart.connections.php">Connections</a></li><li><a href="mysqli.quickstart.statements.php">Executing statements</a></li><li><a href="mysqli.quickstart.prepared-statements.php">Prepared Statements</a></li><li><a href="mysqli.quickstart.stored-procedures.php">Stored Procedures</a></li><li><a href="mysqli.quickstart.multiple-statement.php">Multiple Statements</a></li><li><a href="mysqli.quickstart.transactions.php">API support for transactions</a></li><li><a href="mysqli.quickstart.metadata.php">Metadata</a></li></ul></li><li><a href="mysqli.setup.php">Установка и настройка</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli.requirements.php">Требования</a></li><li><a href="mysqli.installation.php">Установка</a></li><li><a href="mysqli.configuration.php">Настройка во время выполнения</a></li><li><a href="mysqli.resources.php">Типы ресурсов</a></li></ul></li><li><a href="mysqli.persistconns.php">The mysqli Extension and Persistent Connections</a></li><li><a href="mysqli.constants.php">Предопределенные константы</a></li><li><a href="mysqli.summary.php">Основная информация о функциях расширения MySQLi</a></li><li><a href="class.mysqli.php">mysqli</a> — The mysqli class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli.affected-rows.php">mysqli::$affected_rows</a> — Получает число строк, затронутых предыдущей операцией MySQL</li><li><a href="mysqli.autocommit.php">mysqli::autocommit</a> — Включает или отключает автоматическую фиксацию изменений базы данных</li><li><a href="mysqli.change-user.php">mysqli::change_user</a> — Позволяет сменить пользователя подключенного к базе данных</li><li><a href="mysqli.character-set-name.php">mysqli::character_set_name</a> — Возвращает кодировку по умолчанию, установленную для соединения с БД</li><li><a href="mysqli.client-info.php">mysqli::$client_info</a> — Возвращает версию клиента MySQL в виде строки</li><li><a href="mysqli.client-version.php">mysqli::$client_version</a> — Получает информацию о клиенте MySQL</li><li><a href="mysqli.close.php">mysqli::close</a> — Закрывает ранее открытое соединение с базой данных</li><li><a href="mysqli.commit.php">mysqli::commit</a> — Фиксирует текущую транзакцию</li><li><a href="mysqli.connect-errno.php">mysqli::$connect_errno</a> — Возвращает код ошибки последней попытки соединения</li><li><a href="mysqli.connect-error.php">mysqli::$connect_error</a> — Возвращает описание последней ошибки подключения</li><li><a href="mysqli.construct.php">mysqli::__construct</a> — Open a new connection to the MySQL server</li><li><a href="mysqli.debug.php">mysqli::debug</a> — Выполняет процедуры отладки</li><li><a href="mysqli.disable-reads-from-master.php">mysqli::disable_reads_from_master</a> — Блокирует чтение с мастера</li><li><a href="mysqli.dump-debug-info.php">mysqli::dump_debug_info</a> — Журналирование отладочной информации</li><li><a href="mysqli.errno.php">mysqli::$errno</a> — Возвращает код ошибки последнего вызова функции</li><li><a href="mysqli.error-list.php">mysqli::$error_list</a> — Returns a list of errors from the last command executed</li><li><a href="mysqli.error.php">mysqli::$error</a> — Возвращает строку с описанием последней ошибки</li><li><a href="mysqli.field-count.php">mysqli::$field_count</a> — Возвращает число столбцов, затронутых последним запросом</li><li><a href="mysqli.get-charset.php">mysqli::get_charset</a> — Returns a character set object</li><li><a href="mysqli.get-client-info.php">mysqli::get_client_info</a> — Возвращает версию клиента MySQL в виде строки</li><li><a href="mysqli.get-client-stats.php">mysqli_get_client_stats</a> — Возвращает статистику клиента для каждого процесса</li><li><a href="mysqli.get-client-version.php">mysqli::$client_version</a> — Получает информацию о клиенте MySQL</li><li><a href="mysqli.get-connection-stats.php">mysqli::get_connection_stats</a> — Возвращает статистику соединения с клиентом</li><li><a href="mysqli.get-host-info.php">mysqli::$host_info</a> — Возвращает строку, содержащую тип используемого соединения</li><li><a href="mysqli.get-proto-info.php">mysqli::$protocol_version</a> — Возвращает версию используемого MySQL протокола</li><li><a href="mysqli.get-server-info.php">mysqli::$server_info</a> — Возвращает версию MySQL сервера</li><li><a href="mysqli.get-server-version.php">mysqli::$server_version</a> — Возвращает версию сервера MySQL, представленую в виде integer</li><li><a href="mysqli.get-warnings.php">mysqli::get_warnings</a> — Get result of SHOW WARNINGS</li><li><a href="mysqli.info.php">mysqli::$info</a> — Retrieves information about the most recently executed query</li><li><a href="mysqli.init.php">mysqli::init</a> — Initializes MySQLi and returns a resource for use with mysqli_real_connect()</li><li><a href="mysqli.insert-id.php">mysqli::$insert_id</a> — Возвращает автоматически генерируемый ID, используя последний запрос</li><li><a href="mysqli.kill.php">mysqli::kill</a> — Asks the server to kill a MySQL thread</li><li><a href="mysqli.more-results.php">mysqli::more_results</a> — Check if there are any more query results from a multi query</li><li><a href="mysqli.multi-query.php">mysqli::multi_query</a> — Performs a query on the database</li><li><a href="mysqli.next-result.php">mysqli::next_result</a> — Prepare next result from multi_query</li><li><a href="mysqli.options.php">mysqli::options</a> — Set options</li><li><a href="mysqli.ping.php">mysqli::ping</a> — Pings a server connection, or tries to reconnect if the connection has gone down</li><li><a href="mysqli.poll.php">mysqli::poll</a> — Poll connections</li><li><a href="mysqli.prepare.php">mysqli::prepare</a> — Prepare an SQL statement for execution</li><li><a href="mysqli.query.php">mysqli::query</a> — Performs a query on the database</li><li><a href="mysqli.real-connect.php">mysqli::real_connect</a> — Opens a connection to a mysql server</li><li><a href="mysqli.real-escape-string.php">mysqli::real_escape_string</a> — Escapes special characters in a string for use in an SQL statement, taking into account the current charset of the connection</li><li><a href="mysqli.real-query.php">mysqli::real_query</a> — Execute an SQL query</li><li><a href="mysqli.reap-async-query.php">mysqli::reap_async_query</a> — Get result from async query</li><li><a href="mysqli.refresh.php">mysqli::refresh</a> — Refreshes</li><li><a href="mysqli.rollback.php">mysqli::rollback</a> — Rolls back current transaction</li><li><a href="mysqli.rpl-query-type.php">mysqli::rpl_query_type</a> — Returns RPL query type</li><li><a href="mysqli.select-db.php">mysqli::select_db</a> — Устанавливает базу данных для выполняемых запросов</li><li><a href="mysqli.send-query.php">mysqli::send_query</a> — Отправка запроса и возврат</li><li><a href="mysqli.set-charset.php">mysqli::set_charset</a> — Sets the default client character set</li><li><a href="mysqli.set-local-infile-default.php">mysqli::set_local_infile_default</a> — Unsets user defined handler for load local infile command</li><li><a href="mysqli.set-local-infile-handler.php">mysqli::set_local_infile_handler</a> — Set callback function for LOAD DATA LOCAL INFILE command</li><li><a href="mysqli.sqlstate.php">mysqli::$sqlstate</a> — Returns the SQLSTATE error from previous MySQL operation</li><li><a href="mysqli.ssl-set.php">mysqli::ssl_set</a> — Used for establishing secure connections using SSL</li><li><a href="mysqli.stat.php">mysqli::stat</a> — Gets the current system status</li><li><a href="mysqli.stmt-init.php">mysqli::stmt_init</a> — Initializes a statement and returns an object for use with mysqli_stmt_prepare</li><li><a href="mysqli.store-result.php">mysqli::store_result</a> — Transfers a result set from the last query</li><li><a href="mysqli.thread-id.php">mysqli::$thread_id</a> — Returns the thread ID for the current connection</li><li><a href="mysqli.thread-safe.php">mysqli::thread_safe</a> — Returns whether thread safety is given or not</li><li><a href="mysqli.use-result.php">mysqli::use_result</a> — Initiate a result set retrieval</li><li><a href="mysqli.warning-count.php">mysqli::$warning_count</a> — Returns the number of warnings from the last query for the given link</li></ul></li><li><a href="class.mysqli-stmt.php">mysqli_stmt</a> — The mysqli_stmt class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-stmt.affected-rows.php">mysqli_stmt::$affected_rows</a> — Возвращает общее количество строк, измененных, удаленных или
+            добавленных последним выполненным выражением</li><li><a href="mysqli-stmt.attr-get.php">mysqli_stmt::attr_get</a> — Получает текущее значение атрибута запроса</li><li><a href="mysqli-stmt.attr-set.php">mysqli_stmt::attr_set</a> — Изменяет поведение подготовленного запроса</li><li><a href="mysqli-stmt.bind-param.php">mysqli_stmt::bind_param</a> — Binds variables to a prepared statement as parameters</li><li><a href="mysqli-stmt.bind-result.php">mysqli_stmt::bind_result</a> — Binds variables to a prepared statement for result storage</li><li><a href="mysqli-stmt.close.php">mysqli_stmt::close</a> — Закрывает подготовленный запрос</li><li><a href="mysqli-stmt.data-seek.php">mysqli_stmt::data_seek</a> — Seeks to an arbitrary row in statement result set</li><li><a href="mysqli-stmt.errno.php">mysqli_stmt::$errno</a> — Returns the error code for the most recent statement call</li><li><a href="mysqli-stmt.error-list.php">mysqli_stmt::$error_list</a> — Returns a list of errors from the last statement executed</li><li><a href="mysqli-stmt.error.php">mysqli_stmt::$error</a> — Returns a string description for last statement error</li><li><a href="mysqli-stmt.execute.php">mysqli_stmt::execute</a> — Executes a prepared Query</li><li><a href="mysqli-stmt.fetch.php">mysqli_stmt::fetch</a> — Связывает результаты подготовленного выражения с переменными</li><li><a href="mysqli-stmt.field-count.php">mysqli_stmt::$field_count</a> — Возвращает число полей в заданном выражении</li><li><a href="mysqli-stmt.free-result.php">mysqli_stmt::free_result</a> — Освобождает память от результата запроса, указанного дескриптором</li><li><a href="mysqli-stmt.get-result.php">mysqli_stmt::get_result</a> — Получает результат из подготовленного запроса</li><li><a href="mysqli-stmt.get-warnings.php">mysqli_stmt::get_warnings</a> — Получает результат от SHOW WARNINGS</li><li><a href="mysqli-stmt.insert-id.php">mysqli_stmt::$insert_id</a> — Получает ID сгенерированный предыдущей операцией INSERT</li><li><a href="mysqli-stmt.more-results.php">mysqli_stmt::more_results</a> — Check if there are more query results from a multiple query</li><li><a href="mysqli-stmt.next-result.php">mysqli_stmt::next_result</a> — Reads the next result from a multiple query</li><li><a href="mysqli-stmt.num-rows.php">mysqli_stmt::$num_rows</a> — Возвращает число строк в результате запроса</li><li><a href="mysqli-stmt.param-count.php">mysqli_stmt::$param_count</a> — Returns the number of parameter for the given statement</li><li><a href="mysqli-stmt.prepare.php">mysqli_stmt::prepare</a> — Prepare an SQL statement for execution</li><li><a href="mysqli-stmt.reset.php">mysqli_stmt::reset</a> — Resets a prepared statement</li><li><a href="mysqli-stmt.result-metadata.php">mysqli_stmt::result_metadata</a> — Returns result set metadata from a prepared statement</li><li><a href="mysqli-stmt.send-long-data.php">mysqli_stmt::send_long_data</a> — Send data in blocks</li><li><a href="mysqli-stmt.sqlstate.php">mysqli_stmt::$sqlstate</a> — Returns SQLSTATE error from previous statement operation</li><li><a href="mysqli-stmt.store-result.php">mysqli_stmt::store_result</a> — Transfers a result set from a prepared statement</li></ul></li><li><a href="class.mysqli-result.php">mysqli_result</a> — The mysqli_result class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-result.current-field.php">mysqli_result::$current_field</a> — Получает смещение указателя по отношению к текущему полю</li><li><a href="mysqli-result.data-seek.php">mysqli_result::data_seek</a> — Перемещает указатель результата на выбранную строку</li><li><a href="mysqli-result.fetch-all.php">mysqli_result::fetch_all</a> — Fetches all result rows as an associative array, a numeric array, or both</li><li><a href="mysqli-result.fetch-array.php">mysqli_result::fetch_array</a> — Fetch a result row as an associative, a numeric array, or both</li><li><a href="mysqli-result.fetch-assoc.php">mysqli_result::fetch_assoc</a> — Извлекает результирующий ряд в виде ассоциативного массива</li><li><a href="mysqli-result.fetch-field-direct.php">mysqli_result::fetch_field_direct</a> — Fetch meta-data for a single field</li><li><a href="mysqli-result.fetch-field.php">mysqli_result::fetch_field</a> — Returns the next field in the result set</li><li><a href="mysqli-result.fetch-fields.php">mysqli_result::fetch_fields</a> — Returns an array of objects representing the fields in a result set</li><li><a href="mysqli-result.fetch-object.php">mysqli_result::fetch_object</a> — Returns the current row of a result set as an object</li><li><a href="mysqli-result.fetch-row.php">mysqli_result::fetch_row</a> — Get a result row as an enumerated array</li><li><a href="mysqli-result.field-count.php">mysqli_result::$field_count</a> — Get the number of fields in a result</li><li><a href="mysqli-result.field-seek.php">mysqli_result::field_seek</a> — Установить указатель поля на определенное смещение</li><li><a href="mysqli-result.free.php">mysqli_result::free</a> — Frees the memory associated with a result</li><li><a href="mysqli-result.lengths.php">mysqli_result::$lengths</a> — Returns the lengths of the columns of the current row in the result set</li><li><a href="mysqli-result.num-rows.php">mysqli_result::$num_rows</a> — Получает число рядов в результирующей выборке</li></ul></li><li><a href="class.mysqli-driver.php">mysqli_driver</a> — Класс mysqli_driver<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-driver.embedded-server-end.php">mysqli_driver::embedded_server_end</a> — Stop embedded server</li><li><a href="mysqli-driver.embedded-server-start.php">mysqli_driver::embedded_server_start</a> — Initialize and start embedded server</li></ul></li><li><a href="class.mysqli-warning.php">mysqli_warning</a> — The mysqli_warning class<ul class="chunklist chunklist_book chunklist_children"><li><a href="mysqli-warning.construct.php">mysqli_warning::__construct</a> — The __construct purpose</li><li><a href="mysqli-warning.next.php">mysqli_warning::next</a> — The next purpose</li></ul></li><li><a href="class.mysqli-sql-exception.php">mysqli_sql_exception</a> — The mysqli_sql_exception class</li><li><a href="ref.mysqli.php">Синонимы и устаревшие Функции Mysqli</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="function.mysqli-bind-param.php">mysqli_bind_param</a> — Синоним функции mysqli_stmt_bind_param</li><li><a href="function.mysqli-bind-result.php">mysqli_bind_result</a> — Синоним функции mysqli_stmt_bind_result</li><li><a href="function.mysqli-client-encoding.php">mysqli_client_encoding</a> — Синоним функции mysqli_character_set_name</li><li><a href="function.mysqli-connect.php">mysqli_connect</a> — Псевдоним mysqli::__construct</li><li><a href="function.mysqli-disable-rpl-parse.php">mysqli_disable_rpl_parse</a> — Блокировать разбор RPL</li><li><a href="function.mysqli-enable-reads-from-master.php">mysqli_enable_reads_from_master</a> — Включает чтение с мастера</li><li><a href="function.mysqli-enable-rpl-parse.php">mysqli_enable_rpl_parse</a> — Включает разбор RPL</li><li><a href="function.mysqli-escape-string.php">mysqli_escape_string</a> — Псевдоним функции mysqli_real_escape_string</li><li><a href="function.mysqli-execute.php">mysqli_execute</a> — Синоним для mysqli_stmt_execute</li><li><a href="function.mysqli-fetch.php">mysqli_fetch</a> — Синоним для mysqli_stmt_fetch</li><li><a href="function.mysqli-get-cache-stats.php">mysqli_get_cache_stats</a> — Returns client Zval cache statistics</li><li><a href="function.mysqli-get-metadata.php">mysqli_get_metadata</a> — Синоним для mysqli_stmt_result_metadata</li><li><a href="function.mysqli-master-query.php">mysqli_master_query</a> — Enforce execution of a query on the master in a master/slave setup</li><li><a href="function.mysqli-param-count.php">mysqli_param_count</a> — Синоним для mysqli_stmt_param_count</li><li><a href="function.mysqli-report.php">mysqli_report</a> — Enables or disables internal report functions</li><li><a href="function.mysqli-rpl-parse-enabled.php">mysqli_rpl_parse_enabled</a> — Check if RPL parse is enabled</li><li><a href="function.mysqli-rpl-probe.php">mysqli_rpl_probe</a> — RPL probe</li><li><a href="function.mysqli-send-long-data.php">mysqli_send_long_data</a> — Синоним для mysqli_stmt_send_long_data</li><li><a href="function.mysqli-set-opt.php">mysqli_set_opt</a> — Синоним для mysqli_options</li><li><a href="function.mysqli-slave-query.php">mysqli_slave_query</a> — Force execution of a query on a slave in a master/slave setup</li></ul></li><li><a href="changelog.mysqli.php">Список изменений</a></li></ul></div><br /><br />
+<div id="usernotes">
+ <div class="head">
+  <span class="action"><a href="/manual/add-note.php?sect=book.mysqli&amp;redirect=http://www.php.net/manual/ru/book.mysqli.php"><img src="http://static.php.net/www.php.net/images/notes-add.gif" alt="add a note" width="13" height="13" class="middle" /></a> <small><a href="/manual/add-note.php?sect=book.mysqli&amp;redirect=http://www.php.net/manual/ru/book.mysqli.php">add a note</a></small></span>
+  <small>User Contributed Notes</small>
+  <strong>mysqli</strong>
+ </div>
+ <div class="note">There are no user contributed notes for this page.</div></div><br />
+ </div>
+ <div class="cleaner">&nbsp;</div>
+</div>
+
+<div id="footnav">
+   <a href="/source.php?url=/manual/ru/book.mysqli.php">show source</a> |
+ <a href="/credits.php">credits</a> |
+ <a href="/stats/">stats</a> |
+ <a href="/sitemap.php">sitemap</a> |
+ <a href="/contact.php">contact</a> |
+ <a href="/contact.php#ads">advertising</a> |
+ <a href="/mirrors.php">mirror sites</a>
+</div>
+
+<div id="pagefooter">
+ <div id="copyright">
+  <a href="/copyright.php">Copyright &copy; 2001-2012 The PHP Group</a><br />
+  All rights reserved.
+ </div>
+
+ <div id="thismirror">
+  <a href="/mirror.php">This mirror</a> generously provided by:
+  <a href="http://developer.yahoo.com/">Yahoo! Inc.</a><br />
+  Last updated: Wed Nov 28 10:41:17 2012 PST
+ </div>
+</div>
+<!--[if IE 6]>
+<script type="text/javascript">
+    /*Load jQuery if not already loaded*/ if(typeof jQuery == 'undefined'){ document.write("<script type=\"text/javascript\"   src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js\"></"+"script>"); var __noconflict = true; }
+    var IE6UPDATE_OPTIONS = {
+        icons_path: "/ie6update/images/"
+    }
+</script>
+<script type="text/javascript" src="/ie6update/ie6update.js"></script>
+<![endif]-->
+</body>
+</html>

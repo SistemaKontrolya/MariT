@@ -1,0 +1,633 @@
+<div class="notice">В конец запроса была автоматически добавлена обратная кавычка!</div><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru" dir="ltr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <title>phpMyAdmin</title>
+    <link rel="stylesheet" type="text/css" href="phpmyadmin.css.php?server=1&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;js_frame=right&amp;nocache=5408734839" />
+    <link rel="stylesheet" type="text/css" href="print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="./themes/original/jquery/jquery-ui-1.8.16.custom.css" />
+    <meta name="robots" content="noindex,nofollow" />
+<script src="./js/cross_framing_protection.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/jquery/jquery-1.6.2.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/jquery/jquery-ui-1.8.16.custom.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/update-location.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/jquery/timepicker.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/tbl_change.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/tbl_structure.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/indexes.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/gis_data_editor.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/codemirror/lib/codemirror.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/codemirror/mode/mysql/mysql.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/functions.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/jquery/jquery.qtip-1.0.0-rc3.js?ts=1349706081" type="text/javascript"></script>
+<script src="./js/messages.php?lang=ru&amp;db=syst_konrl&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" type="text/javascript"></script>
+<script src="./js/get_image.js.php?theme=original" type="text/javascript"></script>
+<script type="text/javascript">
+// <![CDATA[
+if (typeof(parent.document) != 'undefined' && typeof(parent.document) != 'unknown'
+    && typeof(parent.document.title) == 'string') {
+    parent.document.title = 'localhost / 127.0.0.1 / syst_konrl / trials | phpMyAdmin 3.5.3';
+}
+// ]]>
+</script>
+        <meta name="OBGZip" content="true" />
+                <!--[if IE 6]>
+        <style type="text/css">
+        /* <![CDATA[ */
+        html {
+            overflow-y: scroll;
+        }
+        /* ]]> */
+        </style>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div id='floating_menubar'></div>
+<div id='serverinfo'>
+<img src="themes/dot.gif" title="" alt="" class="icon ic_s_host item" />
+<a href="main.php?token=f38afbaf0158af8bc18ccb39acc1fe8d" class="item">127.0.0.1:3306</a>
+<span class='separator item'>&nbsp;»</span>
+<img src="themes/dot.gif" title="" alt="" class="icon ic_s_db item" />
+<a href="db_structure.php?db=syst_konrl&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" class="item">syst_konrl</a>
+<span class='separator item'>&nbsp;»</span>
+<img src="themes/dot.gif" title="" alt="" class="icon ic_s_tbl item" />
+<a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" class="item">trials</a>
+<span class="hide" id="update_recent_tables"></span><div class="clearfloat"></div></div><div id="topmenucontainer" class="menucontainer"><ul id="topmenu"><li><a class="tab" href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;pos=0" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_browse" />Обзор</a></li><li class="active"><a class="tabactive" href="tbl_structure.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_props" />Структура</a></li><li><a class="tab" href="tbl_sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_sql" />SQL</a></li><li><a class="tab" href="tbl_select.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_search" />Поиск</a></li><li><a class="tab" href="tbl_change.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_insrow" />Вставить</a></li><li><a class="tab" href="tbl_export.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;single_table=true" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_tblexport" />Экспорт</a></li><li><a class="tab" href="tbl_import.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_tblimport" />Импорт</a></li><li><a class="tab" href="tbl_operations.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_tblops" />Операции</a></li><li><a class="tab" href="tbl_tracking.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_eye" />Слежение</a></li><li><a class="tab" href="tbl_triggers.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><img src="themes/dot.gif" title="" alt="" class="icon ic_b_triggers" />Триггеры</a></li></ul>
+<div class="clearfloat"></div></div>
+
+<script type="text/javascript">
+//<![CDATA[
+if (window.parent.updateTableTitle) window.parent.updateTableTitle('syst_konrl.trials', ' (2)');
+//]]>
+</script>
+<div id="result_query" align="left">
+<div class="error">#1054 - Unknown column 'User_id IN (2,6)' in 'where clause'</div><div class="notice">В конец запроса была автоматически добавлена обратная кавычка!</div><code class="sql"><span class="syntax"><span class="inner_sql"><a href="./url.php?url=http%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.1%2Fen%2Fselect.html&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" target="mysql_doc"><span class="syntax_alpha syntax_alpha_reservedWord">SELECT</span></a>  <span class="syntax_punct">*</span> <br /><span class="syntax_alpha syntax_alpha_reservedWord">FROM</span>  <span class="syntax_quote syntax_quote_backtick">`trials`</span> <br /><span class="syntax_alpha syntax_alpha_reservedWord">WHERE</span>  <span class="syntax_quote syntax_quote_backtick">`User_id IN (2,6)`</span> <span class="syntax_white syntax_white_newline"></span><br /><span class="syntax_alpha syntax_alpha_reservedWord">LIMIT</span> <span class="syntax_digit syntax_digit_integer">0</span> <span class="syntax_punct syntax_punct_listsep">,</span> <span class="syntax_digit syntax_digit_integer">30</span></span></span></code><div class="tools"><form action="sql.php" method="post">
+<input type="hidden" name="db" value="syst_konrl" /><input type="hidden" name="table" value="trials" /><input type="hidden" name="token" value="f38afbaf0158af8bc18ccb39acc1fe8d" /><input type="hidden" name="sql_query" value="SELECT * FROM `trials` WHERE `User_id IN (2,6)" />
+<input type="hidden" name="profiling_form" value="1" />
+<input type="checkbox" name="profiling" id="profiling" class="autosubmit" /><label for="profiling">Профилирование</label><noscript><input type="submit" value="OK" /></noscript>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+$('.tools form').last().after('[<a href="#" title="Быстрое редактирование запроса" class="inline_edit_sql">Быстрая правка</a>]');
+//]]>
+</script> [
+<a href="tbl_sql.php?db=syst_konrl&amp;table=trials&amp;sql_query=SELECT+%2A+FROM+%60trials%60+WHERE+%60User_id+IN+%282%2C6%29&amp;show_query=1&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d#querybox" onclick="window.parent.focus_querywindow('SELECT * FROM `trials` WHERE `User_id IN (2,6)'); return false;">Изменить</a>
+] [
+<a href="import.php?db=syst_konrl&amp;table=trials&amp;sql_query=EXPLAIN+SELECT+%2A+FROM+%60trials%60+WHERE+%60User_id+IN+%282%2C6%29&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" >Анализ SQL запроса</a>
+] [
+<a href="import.php?db=syst_konrl&amp;table=trials&amp;sql_query=SELECT+%2A+FROM+%60trials%60+WHERE+%60User_id+IN+%282%2C6%29&amp;show_query=1&amp;show_as_php=1&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" >PHP-код</a>
+] [
+<a href="import.php?db=syst_konrl&amp;table=trials&amp;sql_query=SELECT+%2A+FROM+%60trials%60+WHERE+%60User_id+IN+%282%2C6%29&amp;show_query=1&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" >Обновить</a>
+]</div></div><br class="clearfloat" /><form method="post" action="tbl_structure.php" name="fieldsForm" id="fieldsForm" >
+    <input type="hidden" name="db" value="syst_konrl" /><input type="hidden" name="table" value="trials" /><input type="hidden" name="token" value="f38afbaf0158af8bc18ccb39acc1fe8d" /><input type="hidden" name="table_type" value="table" />
+<table id="tablestructure" class="data PropertiesIconic">
+<thead>
+<tr>
+    <th id="th1"></th>
+    <th id="th2">#</th>
+    <th id="th3" class="column">Имя</th>
+    <th id="th4" class="type">Тип</th>
+    <th id="th5" class="collation">Сравнение</th>
+    <th id="th6" class="attributes">Атрибуты</th>
+    <th id="th7" class="null">Null</th>
+    <th id="th8" class="default">По умолчанию</th>
+    <th id="th9" class="extra">Дополнительно</th>
+    <th colspan="8"
+        id="th10" class="action">Действие</th>
+</tr>
+</thead>
+<tbody>
+
+
+<tr class="odd">
+    <td align="center">
+        <input type="checkbox" name="selected_fld[]" value="ID" id="checkbox_row_1"  />
+    </td>
+    <td align="right">
+        1    </td>
+    <th nowrap="nowrap"><label for="checkbox_row_1"><u>ID</u></label></th>
+    <td nowrap="nowrap"><bdo dir="ltr" xml:lang="en">int(10)</bdo></td>
+    <td></td>
+    <td nowrap="nowrap" class="column_attribute">UNSIGNED</td>
+    <td>Нет</td>
+    <td nowrap="nowrap"><i>Нет</i></td>
+    <td nowrap="nowrap">AUTO_INCREMENT</td>
+        <td align="center" class="edit">
+        <a href="tbl_alter.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;field=ID">
+            <span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a>
+    </td>
+    <td align="center" class="drop">
+        <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+%60ID%60&amp;dropped_column=ID&amp;message_to_show=%D0%9F%D0%BE%D0%BB%D0%B5+ID+%D0%B1%D1%8B%D0%BB%D0%BE+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BE" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a>
+    </td>
+        <td align="center" class="browse replaced_by_more">
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=SELECT+COUNT%28%2A%29+AS+%60%D0%A1%D1%82%D1%80%D0%BE%D0%BA%D0%B8%60%2C+%60ID%60+FROM+%60trials%60+GROUP+BY+%60ID%60+ORDER+BY+%60ID%60">
+            <span class="nowrap"><img src="themes/dot.gif" title="Обзор уникальных значений" alt="Обзор уникальных значений" class="icon ic_b_browse" /></span></a>
+    </td>
+        <td align="center" class="primary replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_bd_primary" /></span>
+
+    </td>
+    <td align="center" class="unique replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_bd_unique" /></span>
+
+    </td>
+    <td align="center" class="index replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+INDEX%28%60ID%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+ID">
+            <span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></a>
+            
+    </td>
+            <td align="center" class="spatial replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Пространственный" alt="Пространственный" class="icon ic_bd_spatial" /></span>
+
+    </td>
+    
+    <td align="center" nowrap="nowrap" class="fulltext replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Полнотекстовый" alt="Полнотекстовый" class="icon ic_bd_ftext" /></span>
+            </td>
+        
+</tr>
+    
+<tr class="even">
+    <td align="center">
+        <input type="checkbox" name="selected_fld[]" value="User_id" id="checkbox_row_2"  />
+    </td>
+    <td align="right">
+        2    </td>
+    <th nowrap="nowrap"><label for="checkbox_row_2">User_id</label></th>
+    <td nowrap="nowrap"><bdo dir="ltr" xml:lang="en">int(3)</bdo></td>
+    <td></td>
+    <td nowrap="nowrap" class="column_attribute">UNSIGNED</td>
+    <td>Нет</td>
+    <td nowrap="nowrap"><i>Нет</i></td>
+    <td nowrap="nowrap"></td>
+        <td align="center" class="edit">
+        <a href="tbl_alter.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;field=User_id">
+            <span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a>
+    </td>
+    <td align="center" class="drop">
+        <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+%60User_id%60&amp;dropped_column=User_id&amp;message_to_show=%D0%9F%D0%BE%D0%BB%D0%B5+User_id+%D0%B1%D1%8B%D0%BB%D0%BE+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BE" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a>
+    </td>
+        <td align="center" class="browse replaced_by_more">
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=SELECT+COUNT%28%2A%29+AS+%60%D0%A1%D1%82%D1%80%D0%BE%D0%BA%D0%B8%60%2C+%60User_id%60+FROM+%60trials%60+GROUP+BY+%60User_id%60+ORDER+BY+%60User_id%60">
+            <span class="nowrap"><img src="themes/dot.gif" title="Обзор уникальных значений" alt="Обзор уникальных значений" class="icon ic_b_browse" /></span></a>
+    </td>
+        <td align="center" class="primary replaced_by_more">
+        
+        <a class="add_primary_key_anchor" href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+PRIMARY+KEY%2C+ADD+PRIMARY+KEY%28%60User_id%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BB%D1%8E%D1%87+%D0%BA+User_id" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_b_primary" /></span></a>
+            
+    </td>
+    <td align="center" class="unique replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+UNIQUE%28%60User_id%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+User_id">
+            <span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_b_unique" /></span></a>
+            
+    </td>
+    <td align="center" class="index replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+INDEX%28%60User_id%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+User_id">
+            <span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></a>
+            
+    </td>
+            <td align="center" class="spatial replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Пространственный" alt="Пространственный" class="icon ic_bd_spatial" /></span>
+
+    </td>
+    
+    <td align="center" nowrap="nowrap" class="fulltext replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Полнотекстовый" alt="Полнотекстовый" class="icon ic_bd_ftext" /></span>
+            </td>
+        
+</tr>
+    
+<tr class="odd">
+    <td align="center">
+        <input type="checkbox" name="selected_fld[]" value="Test_id" id="checkbox_row_3"  />
+    </td>
+    <td align="right">
+        3    </td>
+    <th nowrap="nowrap"><label for="checkbox_row_3">Test_id</label></th>
+    <td nowrap="nowrap"><bdo dir="ltr" xml:lang="en">int(10)</bdo></td>
+    <td></td>
+    <td nowrap="nowrap" class="column_attribute">UNSIGNED</td>
+    <td>Нет</td>
+    <td nowrap="nowrap"><i>Нет</i></td>
+    <td nowrap="nowrap"></td>
+        <td align="center" class="edit">
+        <a href="tbl_alter.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;field=Test_id">
+            <span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a>
+    </td>
+    <td align="center" class="drop">
+        <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+%60Test_id%60&amp;dropped_column=Test_id&amp;message_to_show=%D0%9F%D0%BE%D0%BB%D0%B5+Test_id+%D0%B1%D1%8B%D0%BB%D0%BE+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BE" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a>
+    </td>
+        <td align="center" class="browse replaced_by_more">
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=SELECT+COUNT%28%2A%29+AS+%60%D0%A1%D1%82%D1%80%D0%BE%D0%BA%D0%B8%60%2C+%60Test_id%60+FROM+%60trials%60+GROUP+BY+%60Test_id%60+ORDER+BY+%60Test_id%60">
+            <span class="nowrap"><img src="themes/dot.gif" title="Обзор уникальных значений" alt="Обзор уникальных значений" class="icon ic_b_browse" /></span></a>
+    </td>
+        <td align="center" class="primary replaced_by_more">
+        
+        <a class="add_primary_key_anchor" href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+PRIMARY+KEY%2C+ADD+PRIMARY+KEY%28%60Test_id%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BB%D1%8E%D1%87+%D0%BA+Test_id" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_b_primary" /></span></a>
+            
+    </td>
+    <td align="center" class="unique replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+UNIQUE%28%60Test_id%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Test_id">
+            <span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_b_unique" /></span></a>
+            
+    </td>
+    <td align="center" class="index replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+INDEX%28%60Test_id%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Test_id">
+            <span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></a>
+            
+    </td>
+            <td align="center" class="spatial replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Пространственный" alt="Пространственный" class="icon ic_bd_spatial" /></span>
+
+    </td>
+    
+    <td align="center" nowrap="nowrap" class="fulltext replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Полнотекстовый" alt="Полнотекстовый" class="icon ic_bd_ftext" /></span>
+            </td>
+        
+</tr>
+    
+<tr class="even">
+    <td align="center">
+        <input type="checkbox" name="selected_fld[]" value="Date_start" id="checkbox_row_4"  />
+    </td>
+    <td align="right">
+        4    </td>
+    <th nowrap="nowrap"><label for="checkbox_row_4">Date_start</label></th>
+    <td nowrap="nowrap"><bdo dir="ltr" xml:lang="en">date</bdo></td>
+    <td></td>
+    <td nowrap="nowrap" class="column_attribute"> </td>
+    <td>Нет</td>
+    <td nowrap="nowrap"><i>Нет</i></td>
+    <td nowrap="nowrap"></td>
+        <td align="center" class="edit">
+        <a href="tbl_alter.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;field=Date_start">
+            <span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a>
+    </td>
+    <td align="center" class="drop">
+        <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+%60Date_start%60&amp;dropped_column=Date_start&amp;message_to_show=%D0%9F%D0%BE%D0%BB%D0%B5+Date_start+%D0%B1%D1%8B%D0%BB%D0%BE+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BE" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a>
+    </td>
+        <td align="center" class="browse replaced_by_more">
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=SELECT+COUNT%28%2A%29+AS+%60%D0%A1%D1%82%D1%80%D0%BE%D0%BA%D0%B8%60%2C+%60Date_start%60+FROM+%60trials%60+GROUP+BY+%60Date_start%60+ORDER+BY+%60Date_start%60">
+            <span class="nowrap"><img src="themes/dot.gif" title="Обзор уникальных значений" alt="Обзор уникальных значений" class="icon ic_b_browse" /></span></a>
+    </td>
+        <td align="center" class="primary replaced_by_more">
+        
+        <a class="add_primary_key_anchor" href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+PRIMARY+KEY%2C+ADD+PRIMARY+KEY%28%60Date_start%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BB%D1%8E%D1%87+%D0%BA+Date_start" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_b_primary" /></span></a>
+            
+    </td>
+    <td align="center" class="unique replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+UNIQUE%28%60Date_start%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Date_start">
+            <span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_b_unique" /></span></a>
+            
+    </td>
+    <td align="center" class="index replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+INDEX%28%60Date_start%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Date_start">
+            <span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></a>
+            
+    </td>
+            <td align="center" class="spatial replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Пространственный" alt="Пространственный" class="icon ic_bd_spatial" /></span>
+
+    </td>
+    
+    <td align="center" nowrap="nowrap" class="fulltext replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Полнотекстовый" alt="Полнотекстовый" class="icon ic_bd_ftext" /></span>
+            </td>
+        
+</tr>
+    
+<tr class="odd">
+    <td align="center">
+        <input type="checkbox" name="selected_fld[]" value="Date_end" id="checkbox_row_5"  />
+    </td>
+    <td align="right">
+        5    </td>
+    <th nowrap="nowrap"><label for="checkbox_row_5">Date_end</label></th>
+    <td nowrap="nowrap"><bdo dir="ltr" xml:lang="en">date</bdo></td>
+    <td></td>
+    <td nowrap="nowrap" class="column_attribute"> </td>
+    <td>Нет</td>
+    <td nowrap="nowrap"><i>Нет</i></td>
+    <td nowrap="nowrap"></td>
+        <td align="center" class="edit">
+        <a href="tbl_alter.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;field=Date_end">
+            <span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a>
+    </td>
+    <td align="center" class="drop">
+        <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+%60Date_end%60&amp;dropped_column=Date_end&amp;message_to_show=%D0%9F%D0%BE%D0%BB%D0%B5+Date_end+%D0%B1%D1%8B%D0%BB%D0%BE+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BE" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a>
+    </td>
+        <td align="center" class="browse replaced_by_more">
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=SELECT+COUNT%28%2A%29+AS+%60%D0%A1%D1%82%D1%80%D0%BE%D0%BA%D0%B8%60%2C+%60Date_end%60+FROM+%60trials%60+GROUP+BY+%60Date_end%60+ORDER+BY+%60Date_end%60">
+            <span class="nowrap"><img src="themes/dot.gif" title="Обзор уникальных значений" alt="Обзор уникальных значений" class="icon ic_b_browse" /></span></a>
+    </td>
+        <td align="center" class="primary replaced_by_more">
+        
+        <a class="add_primary_key_anchor" href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+PRIMARY+KEY%2C+ADD+PRIMARY+KEY%28%60Date_end%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BB%D1%8E%D1%87+%D0%BA+Date_end" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_b_primary" /></span></a>
+            
+    </td>
+    <td align="center" class="unique replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+UNIQUE%28%60Date_end%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Date_end">
+            <span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_b_unique" /></span></a>
+            
+    </td>
+    <td align="center" class="index replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+INDEX%28%60Date_end%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Date_end">
+            <span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></a>
+            
+    </td>
+            <td align="center" class="spatial replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Пространственный" alt="Пространственный" class="icon ic_bd_spatial" /></span>
+
+    </td>
+    
+    <td align="center" nowrap="nowrap" class="fulltext replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Полнотекстовый" alt="Полнотекстовый" class="icon ic_bd_ftext" /></span>
+            </td>
+        
+</tr>
+    
+<tr class="even">
+    <td align="center">
+        <input type="checkbox" name="selected_fld[]" value="Passed" id="checkbox_row_6"  />
+    </td>
+    <td align="right">
+        6    </td>
+    <th nowrap="nowrap"><label for="checkbox_row_6">Passed</label></th>
+    <td nowrap="nowrap"><bdo dir="ltr" xml:lang="en">tinyint(1)</bdo></td>
+    <td></td>
+    <td nowrap="nowrap" class="column_attribute"> </td>
+    <td>Да</td>
+    <td nowrap="nowrap"><i>NULL</i></td>
+    <td nowrap="nowrap"></td>
+        <td align="center" class="edit">
+        <a href="tbl_alter.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;field=Passed">
+            <span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a>
+    </td>
+    <td align="center" class="drop">
+        <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+%60Passed%60&amp;dropped_column=Passed&amp;message_to_show=%D0%9F%D0%BE%D0%BB%D0%B5+Passed+%D0%B1%D1%8B%D0%BB%D0%BE+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BE" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a>
+    </td>
+        <td align="center" class="browse replaced_by_more">
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=SELECT+COUNT%28%2A%29+AS+%60%D0%A1%D1%82%D1%80%D0%BE%D0%BA%D0%B8%60%2C+%60Passed%60+FROM+%60trials%60+GROUP+BY+%60Passed%60+ORDER+BY+%60Passed%60">
+            <span class="nowrap"><img src="themes/dot.gif" title="Обзор уникальных значений" alt="Обзор уникальных значений" class="icon ic_b_browse" /></span></a>
+    </td>
+        <td align="center" class="primary replaced_by_more">
+        
+        <a class="add_primary_key_anchor" href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+PRIMARY+KEY%2C+ADD+PRIMARY+KEY%28%60Passed%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BB%D1%8E%D1%87+%D0%BA+Passed" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_b_primary" /></span></a>
+            
+    </td>
+    <td align="center" class="unique replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+UNIQUE%28%60Passed%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Passed">
+            <span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_b_unique" /></span></a>
+            
+    </td>
+    <td align="center" class="index replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+INDEX%28%60Passed%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Passed">
+            <span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></a>
+            
+    </td>
+            <td align="center" class="spatial replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Пространственный" alt="Пространственный" class="icon ic_bd_spatial" /></span>
+
+    </td>
+    
+    <td align="center" nowrap="nowrap" class="fulltext replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Полнотекстовый" alt="Полнотекстовый" class="icon ic_bd_ftext" /></span>
+            </td>
+        
+</tr>
+    
+<tr class="odd">
+    <td align="center">
+        <input type="checkbox" name="selected_fld[]" value="Failed" id="checkbox_row_7"  />
+    </td>
+    <td align="right">
+        7    </td>
+    <th nowrap="nowrap"><label for="checkbox_row_7">Failed</label></th>
+    <td nowrap="nowrap"><bdo dir="ltr" xml:lang="en">tinyint(1)</bdo></td>
+    <td></td>
+    <td nowrap="nowrap" class="column_attribute"> </td>
+    <td>Да</td>
+    <td nowrap="nowrap"><i>NULL</i></td>
+    <td nowrap="nowrap"></td>
+        <td align="center" class="edit">
+        <a href="tbl_alter.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;field=Failed">
+            <span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a>
+    </td>
+    <td align="center" class="drop">
+        <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+%60Failed%60&amp;dropped_column=Failed&amp;message_to_show=%D0%9F%D0%BE%D0%BB%D0%B5+Failed+%D0%B1%D1%8B%D0%BB%D0%BE+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BE" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a>
+    </td>
+        <td align="center" class="browse replaced_by_more">
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=SELECT+COUNT%28%2A%29+AS+%60%D0%A1%D1%82%D1%80%D0%BE%D0%BA%D0%B8%60%2C+%60Failed%60+FROM+%60trials%60+GROUP+BY+%60Failed%60+ORDER+BY+%60Failed%60">
+            <span class="nowrap"><img src="themes/dot.gif" title="Обзор уникальных значений" alt="Обзор уникальных значений" class="icon ic_b_browse" /></span></a>
+    </td>
+        <td align="center" class="primary replaced_by_more">
+        
+        <a class="add_primary_key_anchor" href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+PRIMARY+KEY%2C+ADD+PRIMARY+KEY%28%60Failed%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%BF%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BB%D1%8E%D1%87+%D0%BA+Failed" >
+            <span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_b_primary" /></span></a>
+            
+    </td>
+    <td align="center" class="unique replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+UNIQUE%28%60Failed%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Failed">
+            <span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_b_unique" /></span></a>
+            
+    </td>
+    <td align="center" class="index replaced_by_more">
+        
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;sql_query=ALTER+TABLE+%60trials%60+ADD+INDEX%28%60Failed%60%29&amp;message_to_show=%D0%91%D1%8B%D0%BB+%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD+%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+%D0%B4%D0%BB%D1%8F+Failed">
+            <span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></a>
+            
+    </td>
+            <td align="center" class="spatial replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Пространственный" alt="Пространственный" class="icon ic_bd_spatial" /></span>
+
+    </td>
+    
+    <td align="center" nowrap="nowrap" class="fulltext replaced_by_more">
+        <span class="nowrap"><img src="themes/dot.gif" title="Полнотекстовый" alt="Полнотекстовый" class="icon ic_bd_ftext" /></span>
+            </td>
+        
+</tr>
+    </tbody>
+</table>
+
+<img class="selectallarrow" src="./themes/original/img/arrow_ltr.png"
+    width="38" height="22" alt="С отмеченными:" />
+<a href="tbl_structure.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;checkall=1"
+    onclick="if (markAllRows('fieldsForm')) return false;">
+    Отметить все</a>
+/
+<a href="tbl_structure.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d"
+    onclick="if (unMarkAllRows('fieldsForm')) return false;">
+    Снять выделение</a>
+
+<i>С отмеченными:</i>
+
+<button class="mult_submit" type="submit" name="submit_mult" value="browse" title="Обзор">
+<span class="nowrap"><img src="themes/dot.gif" title="Обзор" alt="Обзор" class="icon ic_b_browse" /></span></button>
+<button class="mult_submit" type="submit" name="submit_mult" value="change" title="Изменить">
+<span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></button>
+<button class="mult_submit" type="submit" name="submit_mult" value="drop" title="Удалить">
+<span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></button>
+<button class="mult_submit" type="submit" name="submit_mult" value="primary" title="Первичный">
+<span class="nowrap"><img src="themes/dot.gif" title="Первичный" alt="Первичный" class="icon ic_b_primary" /></span></button>
+<button class="mult_submit" type="submit" name="submit_mult" value="unique" title="Уникальный">
+<span class="nowrap"><img src="themes/dot.gif" title="Уникальный" alt="Уникальный" class="icon ic_b_unique" /></span></button>
+<button class="mult_submit" type="submit" name="submit_mult" value="index" title="Индекс">
+<span class="nowrap"><img src="themes/dot.gif" title="Индекс" alt="Индекс" class="icon ic_b_index" /></span></button>
+</form>
+<hr />
+
+
+<a href="tbl_printview.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php"><span class="nowrap"><img src="themes/dot.gif" title="Версия для печати" alt="Версия для печати" class="icon ic_b_print" /> Версия для печати</span></a>
+
+<a href="tbl_relation.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php"><span class="nowrap"><img src="themes/dot.gif" title="Связи" alt="Связи" class="icon ic_b_relations" /> Связи</span></a>
+        <a href="sql.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php&amp;session_max_rows=all&amp;sql_query=SELECT+%2A+FROM+%60trials%60+PROCEDURE+ANALYSE%28%29"><span class="nowrap"><img src="themes/dot.gif" title="Анализ структуры таблицы" alt="Анализ структуры таблицы" class="icon ic_b_tblanalyse" /> Анализ структуры таблицы</span></a><a href="./url.php?url=http%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.1%2Fen%2Fprocedure-analyse.html&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" target="mysql_doc"><img src="themes/dot.gif" title="Документация" alt="Документация" class="icon ic_b_help" /></a>
+<a href="tbl_tracking.php?db=syst_konrl&amp;table=trials&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d&amp;goto=tbl_structure.php&amp;back=tbl_structure.php"><span class="nowrap"><img src="themes/dot.gif" title="Отслеживать таблицу" alt="Отслеживать таблицу" class="icon ic_eye" /> Отслеживать таблицу</span></a>
+    <br />
+<form method="post" action="tbl_addfield.php" id="addColumns" name="addColumns"     onsubmit="return checkFormElementInRange(this, 'num_fields', 'Необходимо добавить хотя бы одно поле.', 1)">
+    <input type="hidden" name="db" value="syst_konrl" /><input type="hidden" name="table" value="trials" /><input type="hidden" name="token" value="f38afbaf0158af8bc18ccb39acc1fe8d" /><img src="themes/dot.gif" title="Добавить столбец" alt="Добавить столбец" class="icon ic_b_insrow" />Добавить <input type="text" name="num_fields" size="2" maxlength="2" value="1" onfocus="this.select()" /> поле(я)<input type="radio" name="field_where" id="field_where_last" value="last" checked="checked" />
+<label for="field_where_last">В конец таблицы</label>
+<input type="radio" name="field_where" id="field_where_first" value="first" />
+<label for="field_where_first">В начало таблицы</label>
+<input type="radio" name="field_where" id="field_where_after" value="after" />
+<label for="field_where_after">После </label>
+<select name="after_field" onclick="this.form.field_where[2].checked=true" onchange="this.form.field_where[2].checked=true"><option value="ID">ID</option>
+<option value="User_id">User_id</option>
+<option value="Test_id">Test_id</option>
+<option value="Date_start">Date_start</option>
+<option value="Date_end">Date_end</option>
+<option value="Passed">Passed</option>
+<option value="Failed">Failed</option>
+</select><input type="submit" value="OK" />
+</form>
+<iframe class="IE_hack" scrolling="no"></iframe>
+<hr />
+<div id="index_div"  >
+    <div id="indexes"  style="display: none; overflow:auto;" class="pma_auto_slider" title="Индексы">
+    <fieldset><legend id="index_header">Индексы<a href="./url.php?url=http%3A%2F%2Fdev.mysql.com%2Fdoc%2Frefman%2F5.1%2Fen%2Foptimizing-database-structure.html&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" target="mysql_doc"><img src="themes/dot.gif" title="Документация" alt="Документация" class="icon ic_b_help" /></a></legend><div class='no_indexes_defined hide'><div class="notice">Индекс не определен!</div></div><div class="notice">Индексы PRIMARY и ID равнозначны и один из них может быть удалён.</div><table id="table_index"><thead><tr><th colspan="2">Действие</th><th>Имя индекса</th><th>Тип</th><th>Уникальный</th><th>Упакован</th><th>Поле</th><th>Уникальных элементов</th><th>Сравнение</th><th>Null</th><th>Комментарий</th></tr></thead><tbody><tr class="noclick odd"><td class="edit_index "  rowspan="1" >    <a href="tbl_indexes.php?db=syst_konrl&amp;table=trials&amp;index=PRIMARY&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d"><span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a></td>
+<td  rowspan="1" ><input type="hidden" class="drop_primary_key_index_msg" value="`ALTER TABLE trials DROP PRIMARY KEY`" />    <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+PRIMARY+KEY&amp;message_to_show=%D0%9F%D0%B5%D1%80%D0%B2%D0%B8%D1%87%D0%BD%D1%8B%D0%B9+%D0%BA%D0%BB%D1%8E%D1%87+%D0%B1%D1%8B%D0%BB+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a></td>
+<th  rowspan="1" >PRIMARY</th><td  rowspan="1" >BTREE</td><td  rowspan="1" >Да</td><td  rowspan="1" >Нет</td><td>ID</td><td>2</td><td>A</td><td>Нет</td><td  rowspan="1" ></td></tr><tr class="noclick even"><td class="edit_index "  rowspan="1" >    <a href="tbl_indexes.php?db=syst_konrl&amp;table=trials&amp;index=ID&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d"><span class="nowrap"><img src="themes/dot.gif" title="Изменить" alt="Изменить" class="icon ic_b_edit" /></span></a></td>
+<td  rowspan="1" ><input type="hidden" class="drop_primary_key_index_msg" value="`ALTER TABLE trials DROP INDEX ID`" />    <a  href="sql.php?db=syst_konrl&amp;table=trials&amp;sql_query=ALTER+TABLE+%60trials%60+DROP+INDEX+%60ID%60&amp;message_to_show=%D0%98%D0%BD%D0%B4%D0%B5%D0%BA%D1%81+ID+%D0%B1%D1%8B%D0%BB+%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD&amp;token=f38afbaf0158af8bc18ccb39acc1fe8d" ><span class="nowrap"><img src="themes/dot.gif" title="Удалить" alt="Удалить" class="icon ic_b_drop" /></span></a></td>
+<th  rowspan="1" >ID</th><td  rowspan="1" >BTREE</td><td  rowspan="1" >Да</td><td  rowspan="1" >Нет</td><td>ID</td><td>2</td><td>A</td><td>Нет</td><td  rowspan="1" ></td></tr></tbody></table></fieldset>        <fieldset class="tblFooters" style="text-align: left;">
+            <form action="./tbl_indexes.php" method="post">
+                <input type="hidden" name="db" value="syst_konrl" /><input type="hidden" name="table" value="trials" /><input type="hidden" name="token" value="f38afbaf0158af8bc18ccb39acc1fe8d" />Создать индекс для &nbsp;<input type="text" size="2" name="added_fields" value="1" />&nbsp;столбца/ов                <input type="hidden" name="create_index" value="1" />
+                <input class="add_index" type="submit" value="OK" />
+            </form>
+        </fieldset>
+    </div>
+</div>
+    <div id="tablestatistics">
+    <fieldset>
+    <legend>Информация</legend>
+    <a name="showusage"></a>
+        <table id="tablespaceusage" class="data">
+    <caption class="tblHeaders">Используемое пространство</caption>
+    <tbody>
+    <tr class="odd">
+        <th class="name">Данные</th>
+        <td class="value">16</td>
+        <td class="unit">КБ</td>
+    </tr>
+            <tr class="even">
+        <th class="name">Индекс</th>
+        <td class="value">16</td>
+        <td class="unit">КБ</td>
+    </tr>
+                <tr class="odd">
+        <th class="name">Всего</th>
+        <td class="value">32</td>
+        <td class="unit">КБ</td>
+    </tr>
+                </tbody>
+    </table>
+            <table id="tablerowstats" class="data">
+    <caption class="tblHeaders">Статистика строк</caption>
+    <tbody>
+        <tr class="odd">
+        <th class="name">Формат</th>
+        <td class="value">Compact</td>
+    </tr>
+            <tr class="even">
+        <th class="name">Сравнение</th>
+        <td class="value"><dfn title="Юникод (многоязычный), регистронезависимый">utf8_general_ci</dfn></td>
+    </tr>
+            <tr class="odd">
+        <th class="name">Следующий автоматический индекс</th>
+        <td class="value">11</td>
+    </tr>
+            <tr class="even">
+        <th class="name">Создание</th>
+        <td class="value">Ноя 25 2012 г., 15:16</td>
+    </tr>
+            </tbody>
+    </table>
+    </fieldset>
+    <!-- close tablestatistics div -->
+    </div>
+
+    <div class="clearfloat"></div>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function() {
+// updates current settings
+if (window.parent.setAll) {
+    window.parent.setAll('ru', 'utf8_general_ci', '1', 'syst_konrl', 'trials', 'f38afbaf0158af8bc18ccb39acc1fe8d');
+}
+    // set current db, table and sql query in the querywindow
+if (window.parent.reload_querywindow) {
+    window.parent.reload_querywindow(
+        'syst_konrl',
+        'trials',
+        '');
+}
+    
+if (window.parent.frame_content) {
+    // reset content frame name, as querywindow needs to set a unique name
+    // before submitting form data, and navigation frame needs the original name
+    if (typeof(window.parent.frame_content.name) != 'undefined'
+     && window.parent.frame_content.name != 'frame_content') {
+        window.parent.frame_content.name = 'frame_content';
+    }
+    if (typeof(window.parent.frame_content.id) != 'undefined'
+     && window.parent.frame_content.id != 'frame_content') {
+        window.parent.frame_content.id = 'frame_content';
+    }
+    //window.parent.frame_content.setAttribute('name', 'frame_content');
+    //window.parent.frame_content.setAttribute('id', 'frame_content');
+}
+});
+
+//]]>
+</script>
+</body>
+</html>
+ �_�~��  

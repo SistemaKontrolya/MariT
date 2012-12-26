@@ -1,0 +1,76 @@
+{
+   "background_mode": {
+      "enabled": false
+   },
+   "browser": {
+      "hung_plugin_detect_freq": 2000,
+      "last_redirect_origin": "",
+      "plugin_message_response_timeout": 25000
+   },
+   "local_state": {
+      "multiple_profile_prefs_version": 7
+   },
+   "ntp": {
+      "promo_locale": "ru",
+      "promo_version": 7
+   },
+   "profile": {
+      "info_cache": {
+         "Default": {
+            "avatar_icon": "chrome://theme/IDR_PROFILE_AVATAR_0",
+            "background_apps": false,
+            "name": "\u041F\u0435\u0440\u0432\u044B\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C",
+            "user_name": ""
+         }
+      },
+      "last_active_profiles": [ "Default" ],
+      "last_used": "Default"
+   },
+   "shutdown": {
+      "num_processes": 0,
+      "num_processes_slow": 0,
+      "type": 0
+   },
+   "task_manager": {
+      "window_placement": {
+         "bottom": 679,
+         "left": 722,
+         "maximized": false,
+         "right": 1198,
+         "top": 371,
+         "work_area_bottom": 728,
+         "work_area_left": 0,
+         "work_area_right": 1366,
+         "work_area_top": 0
+      }
+   },
+   "uninstall_metrics": {
+      "installation_date2": "1352404804",
+      "launch_count": "21"
+   },
+   "user_experience_metrics": {
+      "low_entropy_source": 1315,
+      "session_id": 20,
+      "stability": {
+         "breakpad_registration_fail": 0,
+         "breakpad_registration_ok": 0,
+         "crash_count": 1,
+         "debugger_not_present": 21,
+         "debugger_present": 0,
+         "exited_cleanly": false,
+         "incomplete_session_end_count": 0,
+         "last_timestamp_sec": "1356488907",
+         "launch_count": 21,
+         "launch_time_sec": "1356470607",
+         "page_load_count": 0,
+         "renderer_crash_count": 0,
+         "renderer_hang_count": 0,
+         "session_end_completed": true,
+         "stats_buildtime": "1349453897",
+         "stats_version": "22.0.1250.0"
+      }
+   },
+   "was": {
+      "restarted": false
+   }
+}

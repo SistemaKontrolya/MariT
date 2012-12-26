@@ -1,0 +1,13 @@
+{
+   "background_page": "background.html",
+   "content_scripts": [ {
+      "js": [ "contentscript.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "RealPlayer HTML5Video Downloader Extension",
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCl0WKWTrid8Fh+tsoJPRheLc7tksPgH1NfLF79Fj3YKb0fk2Fip1eE/chfSnGWQkxe5Ck2r+ZPba7m+FWQhZDCE5EXvOTDoqi7TEvjccW5pMpW5wCUOLKQVSttgBwkY8EUYt40SwtJ6HmLoPZfQmo9W3qAjnlhlF5AkY4jYgBv3QIDAQAB",
+   "name": "RealPlayer HTML5Video Downloader Extension",
+   "permissions": [ "tabs", "http://*/*", "https://*/*" ],
+   "version": "1.5"
+}
