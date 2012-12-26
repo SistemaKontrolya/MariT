@@ -9,7 +9,7 @@ if(isset($submit))
 <html>
 <head>
 <meta charset="utf-8">
-<title>Сохранение Теста</title>
+<title>РЎРѕС…СЂР°РЅРµРЅРёРµ РўРµСЃС‚Р°</title>
 </head>
 <body>
 </body></html>

@@ -435,7 +435,7 @@ function EditTest($test_id,$just_show){
 	<tr><td>&nbsp;</td><td align="right">';
 	if(!$just_show){
 		if($test_id){
-			echo '<a href="deltest.php?id='.$test_id.'"><button onClick="return confirm(\'Внимание! Тест '.$test["Name"].' будет удален. удаление теста повлечет за собой удаление связанных ВОПРОСОВ И ОТВЕТОВ, а также назначенных ЗАДАНИЙ для тестирования! Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete"></button></a>';
+			echo '<a href="deltest.php?id='.$test_id.'" onClick="return confirm(\'Внимание! Тест '.$test["Name"].' будет удален. удаление теста повлечет за собой удаление связанных ВОПРОСОВ И ОТВЕТОВ, а также назначенных ЗАДАНИЙ для тестирования! Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete"></a>';
 			}
 		echo '<button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button>';
 		}
