@@ -429,7 +429,7 @@ function EditTest($test_id,$just_show){
 	<tr><td>Тема</td><td><select name="select_subject" '.$disabled.'><option selected value="'.$test["Subject"].'">'.$test["Subject_name"].'</option>';
 	for($i;$i<$subjects_amount;$i++){
 		$subject=mysql_fetch_object($subjects);
-		if(($subject->ID)!=($_GET["subject"]))
+		if(($subject->ID)!=($test["Subject"]))
 			echo '<option value="'.$subject->ID.'">'.$subject->Name.'</option>';
 	}
 	echo '</select></td></tr>
@@ -493,9 +493,9 @@ function ShowQuestions($test_id){
 	if(!$amount_questions) echo '<span class="warning">К этому тесту нет привязанных вопросов</span><br>';
 	echo '<a href="'.$_SESSION['location'].'&new_question=1#edit"><img src="/pic/plus_16.png">Создать новый вопрос</a>';
 	if(isset($_GET['new_question'])){
-		echo '<div><form name="new_question" action="savequestion.php" method="POST"><input type="text" name="owner" value="'.$test_id.'" hidden></input>
+		echo '<div><form name="newquestion" action="savequestion.php" method="POST"><input type="text" name="owner" value="'.$test_id.'" hidden></input>
 		<textarea name="content" cols="57" rows="3" autofocus></textarea><br>
-		<button type="submit" name="new_question"><img src="/pic/save_32.png" alt="сохранить" title="сохранить"></button>
+		<button type="submit" name="newquestion"><img src="/pic/save_32.png" alt="сохранить" title="сохранить"></button>
 		</form></div>';
 	}
 	echo '<div><ul style="list-style-type: decimal;list-style-position: inside"><b>'.$test_name[Name].'</b>';
@@ -516,7 +516,7 @@ function EditQuestion($id){
 	<input type="hidden" name="owner" value="'.$id.'"></input>
 	Вопрос:<br>
 	<textarea name="question" cols="60" rows="3">'.$question_info["Content"].'</textarea><br>
-	<input type="hidden" name="question_id" value="'.$question_info["ID"].'"></input>';
+	<input name="question_id" value="'.$question_info["ID"].'"></input>';
 	if(!$answers_amount) echo "Не введено ни одного ответа<br>Введите ";
 		echo 'варианты ответов: <br>';
 		//выводим 6 полей для редактирования. если ответа еще нет, поле пустое
@@ -529,23 +529,22 @@ function EditQuestion($id){
 		<textarea cols="57" rows="1" name="answer_cont'.$i.'">'.$answer->Content.'</textarea><span></span><br>';
 		}
 	echo '<button type="submit" name="save_question"><img src="/pic/save_32.png" alt="сохранить" title="сохранить"></button>';
-	echo '<button onClick="return confirm(\'Внимание! Вопрос будет удален. УДАЛЕНИЕ ВОПРОСА ПОВЛЕЧЕТ ЗА СОБОЙ УДАЛЕНИЕ СВЯЗАННЫХ ОТВЕТОВ! Вы согласны?\')" type="submit" name="delete">
-	<img src="/pic/delete_32.png" alt="delete" ></button>';
+	echo '<a href="savequestion.php?delete=1&question_id='.$question_info["ID"].'" onClick="return confirm(\'Внимание! Вопрос будет удален. УДАЛЕНИЕ ВОПРОСА ПОВЛЕЧЕТ ЗА СОБОЙ УДАЛЕНИЕ СВЯЗАННЫХ ОТВЕТОВ! Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete" ></a>';
 	echo'</form></div><a href="'.$_SESSION['location'].'"><button>Отмена</button></a></div>';
 }
 
 function SaveQuestion($question_content, $question_id, $owner){
-if(isset($question_id))
+if($question_id)
 	$save_question=mysql_query("UPDATE `questions` SET `Content`='$question_content' WHERE `ID`='$question_id'") or die("Invalid query: ".mysql_error());
 else
-	$save_question=mysql_query("INSERT INTO `questions` (`ID`,`Content`,`Test_owner`) VALUES ('$question_id','$question_content','$owner')");
+$save_question=mysql_query("INSERT INTO `questions` (`ID`,`Content`,`Test_owner`) VALUES ('$question_id','$question_content','$owner')") or die(mysql_error());
 }
 
 function DeleteQuestion($id){
 	if($id){
 		$check_answers=mysql_query("SELECT `ID` FROM `answers` WHERE `Question_owner`='$id'");
 		$num_answers=mysql_num_rows($check_answers);
-		$delete=mysql_query("DELETE FROM `questions` where `ID`='$id'");
+		$delete=mysql_query("DELETE FROM `questions` where `ID`='$id'") or die(mysql_error());
 		 if($num_answers){
 			for($i;$i<$num_answers;$i++){
 				$ans=mysql_fetch_object($check_answers);

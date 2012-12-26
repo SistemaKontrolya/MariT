@@ -1,13 +1,13 @@
 <?php
 session_start();
 include ("../../link.php");
-$delete=$_POST['delete']; 
+$delete=$_GET['delete']; 
 //добавление нового вопроса
 $save=$_POST['save_question'];
-if(!isset($delete)){
+if(!$delete){
 //добавление нового вопроса
-	if(isset($_POST['new_question'])){ 
-		if($_POST[content]!='')
+	if(isset($_POST['newquestion'])){ 
+		if($_POST['content']!='')
 			$save_new=SaveQuestion($_POST['content'],'',$_POST['owner']);
 		else $_SESSION['msg']="Запрещено сохранять пустой вопрос";
 	}
@@ -34,7 +34,7 @@ if(!isset($delete)){
 	//если не заполено ни одно поле, ничего не делаем
 		}
 	}
-} else DeleteQuestion($_POST['question_id']);
+} else DeleteQuestion($_GET['question_id']);
 header("Location: index.php".$_SESSION['location']);
 ?>
 <!DOCTYPE html>
