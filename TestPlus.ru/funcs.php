@@ -259,7 +259,7 @@ function EditUsers($id,$just_show){
 	<tr><td></td><td align="right">';
 	if(!$just_show){
 		if($id)
-			echo '<a href="deluser.php onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><button><img src="/pic/delete_32.png" alt="delete"></button></a>';
+			echo '<a href="deluser.php?id='.$id.'" onClick="return confirm(\'Внимание! Пользователь '.$str["Name"].' будет удален. Вы согласны?\')"><img src="/pic/delete_32.png" alt="delete"></a>';
 		echo '<button type="submit" name="save"><img src="/pic/save_32.png" alt="Сохранить" title="Сохранить"></button>';
 	}
 	echo '&nbsp;</td></tr></table></form></div>';
@@ -281,13 +281,20 @@ function SaveUser($id,$name,$login,$password,$email,$group,$adm,$usr){
 function DeleteUser($id){
 	
 	if($id != NULL){
-		if($id==$_SESSION['Id']) $_SESSION['msg']='Вы пытаетесь удалить себя! Это невозможно';
-		elseif($id !=1) $delete=mysql_query("DELETE FROM `Users` where `ID`=$id");
-		elseif($id==1) $_SESSION['msg']='Невозможно удалить пользователя admin';
-		(!$delete)or($_SESSION['msg']='Пользователь удален успешно');}
+		$check_trials=mysql_query("SELECT `ID` FROM `trials` WHERE `User_id`='$id'");
+		$num_trials=mysql_num_rows($check_trials);
+		if($id==$_SESSION['id']) 
+			$_SESSION['msg']='Вы пытаетесь удалить себя! Это невозможно';
+		elseif(!$num_trials){
+		if($id !=1) 
+			$delete=mysql_query("DELETE FROM `Users` where `ID`=$id");
+		elseif($id==1) 
+			$_SESSION['msg']='Невозможно удалить пользователя admin';
+		(!$delete)or($_SESSION['msg']='Пользователь удален успешно');
+		} else $_SESSION['msg']='Данному пользователю назначено тестирование. Удаление остановлено<br>';
+	}
 	header("Location: index.php");
 }
-
 function ShowSubjects(){
 	$get_subjects=mysql_query("SELECT * FROM `subjects`");
 	$subjects_amount=mysql_num_rows($get_subjects);
